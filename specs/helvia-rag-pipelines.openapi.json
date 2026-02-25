@@ -1,0 +1,2942 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Helvia.ai RAG Pipelines Service",
+    "description": "Helvia.ai GPT Pipelines Service",
+    "contact": {
+      "name": "Helvia.ai",
+      "url": "https://helvia.ai",
+      "email": "contact@helvia.ai"
+    },
+    "version": "1.6.0"
+  },
+  "paths": {
+    "/pipelines": {
+      "get": {
+        "tags": [
+          "Helvia NLP Pipelines Service"
+        ],
+        "summary": "List Pipelines",
+        "description": "List all pipelines with pagination",
+        "operationId": "list_pipelines_pipelines_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Page",
+              "exclusiveMinimum": 0.0,
+              "type": "integer",
+              "default": 1
+            },
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Pagesize",
+              "exclusiveMinimum": 0.0,
+              "type": "integer",
+              "default": 10
+            },
+            "name": "pageSize",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PipelinePaginatedResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Helvia NLP Pipelines Service"
+        ],
+        "summary": "Create Pipeline",
+        "description": "Create a new pipeline",
+        "operationId": "create_pipeline_pipelines_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PipelineCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pipeline"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/pipelines/analytics": {
+      "get": {
+        "tags": [
+          "Helvia NLP Pipelines Service"
+        ],
+        "summary": "List Analytics",
+        "description": "List all analytics entries with pagination",
+        "operationId": "list_analytics_pipelines_analytics_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Pipeline Id",
+              "type": "string"
+            },
+            "name": "pipeline_id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Page",
+              "exclusiveMinimum": 0.0,
+              "type": "integer",
+              "default": 1
+            },
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Pagesize",
+              "exclusiveMinimum": 0.0,
+              "type": "integer",
+              "default": 10
+            },
+            "name": "pageSize",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PipelineAnalyticsPaginatedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/pipelines/analytics/aggregated": {
+      "get": {
+        "tags": [
+          "Helvia NLP Pipelines Service"
+        ],
+        "summary": "List Analytics",
+        "description": "List analytics entries with aggregation",
+        "operationId": "list_analytics_pipelines_analytics_aggregated_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Pipeline Id",
+              "type": "string"
+            },
+            "name": "pipeline_id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Organization Id",
+              "type": "string"
+            },
+            "name": "organization_id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Tenant Id",
+              "type": "string"
+            },
+            "name": "tenant_id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            },
+            "name": "session_id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Start Date",
+              "type": "string",
+              "format": "date-time"
+            },
+            "name": "start_date",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "End Date",
+              "type": "string",
+              "format": "date-time"
+            },
+            "name": "end_date",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PipelineAnalyticsAggregatedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/pipelines/{pipeline_id}": {
+      "get": {
+        "tags": [
+          "Helvia NLP Pipelines Service"
+        ],
+        "summary": "Get Pipeline",
+        "description": "Get the pipeline info",
+        "operationId": "get_pipeline_pipelines__pipeline_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Pipeline Id",
+              "type": "string"
+            },
+            "name": "pipeline_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Show Doc Details",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "show_doc_details",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pipeline"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Helvia NLP Pipelines Service"
+        ],
+        "summary": "Delete Pipeline",
+        "description": "Delete a pipeline",
+        "operationId": "delete_pipeline_pipelines__pipeline_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Pipeline Id",
+              "type": "string"
+            },
+            "name": "pipeline_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Helvia NLP Pipelines Service"
+        ],
+        "summary": "Update Pipeline",
+        "description": "Update a pipeline",
+        "operationId": "update_pipeline_pipelines__pipeline_id__patch",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Pipeline Id",
+              "type": "string"
+            },
+            "name": "pipeline_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PipelineUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pipeline"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/pipelines/{pipeline_id}/corpus": {
+      "get": {
+        "tags": [
+          "Helvia NLP Pipelines Service"
+        ],
+        "summary": "List Corpus",
+        "description": "List all training content in the pipeline with pagination",
+        "operationId": "list_corpus_pipelines__pipeline_id__corpus_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Pipeline Id",
+              "type": "string"
+            },
+            "name": "pipeline_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Page",
+              "exclusiveMinimum": 0.0,
+              "type": "integer",
+              "default": 1
+            },
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Pagesize",
+              "exclusiveMinimum": 0.0,
+              "type": "integer",
+              "default": 10
+            },
+            "name": "pageSize",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CorpusItemPaginatedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Helvia NLP Pipelines Service"
+        ],
+        "summary": "Update Pipeline Corpus",
+        "description": "Updates/Creates corpus in the specified pipeline.",
+        "operationId": "update_pipeline_corpus_pipelines__pipeline_id__corpus_put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Pipeline Id",
+              "type": "string"
+            },
+            "name": "pipeline_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Body",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CorpusItem"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/pipelines/{pipeline_id}:process": {
+      "post": {
+        "tags": [
+          "Helvia NLP Pipelines Service"
+        ],
+        "summary": "Process",
+        "description": "Process the given query using the specified pipeline",
+        "operationId": "process_pipelines__pipeline_id__process_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Pipeline Id",
+              "type": "string"
+            },
+            "name": "pipeline_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PipelineProcess"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PipelineProcessResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/pipelines/{pipeline_id}:search": {
+      "post": {
+        "tags": [
+          "Helvia NLP Pipelines Service"
+        ],
+        "summary": "Search",
+        "description": "Search semantically the given query using the specified pipeline",
+        "operationId": "search_pipelines__pipeline_id__search_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Pipeline Id",
+              "type": "string"
+            },
+            "name": "pipeline_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PipelineSearch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PipelineSearchResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/pipelines/{pipeline_id}:index": {
+      "post": {
+        "tags": [
+          "Helvia NLP Pipelines Service"
+        ],
+        "summary": "Index Pipeline",
+        "operationId": "index_pipeline_pipelines__pipeline_id__index_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Pipeline Id",
+              "type": "string"
+            },
+            "name": "pipeline_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Force",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "force",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Sync",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "sync",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Start training the pipeline"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Pipeline is already training"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/pipelines/{pipeline_id}:train": {
+      "post": {
+        "tags": [
+          "Helvia NLP Pipelines Service"
+        ],
+        "summary": "Train Pipeline",
+        "operationId": "train_pipeline_pipelines__pipeline_id__train_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Pipeline Id",
+              "type": "string"
+            },
+            "name": "pipeline_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Force",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "force",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Sync",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "sync",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Start training the pipeline"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Pipeline is already training"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/admin/token": {
+      "post": {
+        "tags": [
+          "Administration endpoint"
+        ],
+        "summary": "Create Token",
+        "description": "Create a new token",
+        "operationId": "create_token_admin_token_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/admin/nlp_providers": {
+      "get": {
+        "tags": [
+          "Administration endpoint"
+        ],
+        "summary": "List Nlp Providers",
+        "description": "List all NLP Providers",
+        "operationId": "list_nlp_providers_admin_nlp_providers_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response List Nlp Providers Admin Nlp Providers Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SystemNLPProvider"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Administration endpoint"
+        ],
+        "summary": "Create Nlp Provider",
+        "description": "Create a new NLP Provider",
+        "operationId": "create_nlp_provider_admin_nlp_providers_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SystemNLPProviderCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemNLPProvider"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/admin/nlp_providers/{nlp_provider_id}": {
+      "get": {
+        "tags": [
+          "Administration endpoint"
+        ],
+        "summary": "Get Nlp Provider",
+        "description": "Get an NLP Provider",
+        "operationId": "get_nlp_provider_admin_nlp_providers__nlp_provider_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Nlp Provider Id",
+              "type": "string"
+            },
+            "name": "nlp_provider_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemNLPProvider"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Administration endpoint"
+        ],
+        "summary": "Delete Nlp Provider",
+        "description": "Delete an NLP Provider",
+        "operationId": "delete_nlp_provider_admin_nlp_providers__nlp_provider_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Nlp Provider Id",
+              "type": "string"
+            },
+            "name": "nlp_provider_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Administration endpoint"
+        ],
+        "summary": "Update Nlp Provider",
+        "description": "Update an NLP Provider",
+        "operationId": "update_nlp_provider_admin_nlp_providers__nlp_provider_id__patch",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Nlp Provider Id",
+              "type": "string"
+            },
+            "name": "nlp_provider_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SystemNLPProvider"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemNLPProvider"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/admin/vdb_collections": {
+      "get": {
+        "tags": [
+          "Administration endpoint"
+        ],
+        "summary": "List Vdb Collection",
+        "description": "List all VDB Collections",
+        "operationId": "list_vdb_collection_admin_vdb_collections_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response List Vdb Collection Admin Vdb Collections Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VDBCollectionAllocation"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/admin/config": {
+      "get": {
+        "tags": [
+          "Administration endpoint"
+        ],
+        "summary": "List Configurations",
+        "description": "Get all configurations",
+        "operationId": "list_configurations_admin_config_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response List Configurations Admin Config Get",
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Root",
+        "description": "This is the root endpoint",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ChatHistoryConfiguration": {
+        "title": "ChatHistoryConfiguration",
+        "type": "object",
+        "properties": {
+          "max_messages": {
+            "title": "Maximum messages in history",
+            "type": "integer",
+            "description": "The max number of messages to keep in chat history per session",
+            "default": 10
+          },
+          "enabled": {
+            "title": "Determines if the chat history feature is enabled.",
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "ChatMessage": {
+        "title": "ChatMessage",
+        "required": [
+          "role",
+          "content"
+        ],
+        "type": "object",
+        "properties": {
+          "role": {
+            "title": "Role",
+            "type": "string"
+          },
+          "content": {
+            "title": "Content",
+            "type": "string"
+          },
+          "language": {
+            "title": "Language",
+            "type": "string"
+          }
+        }
+      },
+      "ClassicTranslationProvider": {
+        "title": "ClassicTranslationProvider",
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Translation Provider type",
+            "enum": [
+              "CLASSIC"
+            ],
+            "type": "string",
+            "description": "Must be set to CLASSIC to define a ClassicTranslationProvider"
+          },
+          "platform": {
+            "title": "Provider platform",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TranslationPlatform"
+              }
+            ]
+          },
+          "remote_glossaries": {
+            "title": "Set of remote glossaries URIs",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/RemoteGlossaryConfig"
+            },
+            "description": "Glossaries to use when invoking translation providers using a glossary. These glossaries, when available, are created at the provider's service. For example, see https://cloud.google.com/translate/docs/advanced/glossary"
+          },
+          "location": {
+            "title": "Translation provider location",
+            "type": "string",
+            "description": "The location of the translation provider. Required by Google Translation Service and defaults to global if not set.",
+            "default": "global"
+          }
+        }
+      },
+      "CorpusItem": {
+        "title": "CorpusItem",
+        "required": [
+          "id",
+          "title",
+          "body"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Corpus Item unique identifier",
+            "type": "string"
+          },
+          "shared_corpus_id": {
+            "title": "Shared Corpus Item unique identifier",
+            "type": "string"
+          },
+          "need_training": {
+            "title": "Defines whether this Corpus Item needs training",
+            "type": "boolean"
+          },
+          "title": {
+            "title": "Title of the Corpus Item",
+            "type": "string"
+          },
+          "body": {
+            "title": "Body of the Corpus Item",
+            "type": "string"
+          },
+          "training_text": {
+            "title": "Training Text",
+            "type": "string"
+          },
+          "group": {
+            "title": "Group",
+            "type": "string"
+          },
+          "language": {
+            "title": "Language",
+            "type": "string",
+            "description": "The language of this item",
+            "default": "en"
+          },
+          "tags": {
+            "title": "Tags",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "pipeline_id": {
+            "title": "Pipeline Id",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CorpusItemPaginatedResponse": {
+        "title": "CorpusItemPaginatedResponse",
+        "required": [
+          "count",
+          "items",
+          "page",
+          "pageSize"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CorpusItem"
+            }
+          },
+          "page": {
+            "title": "Page",
+            "type": "integer"
+          },
+          "pageSize": {
+            "title": "Pagesize",
+            "type": "integer"
+          }
+        }
+      },
+      "EmbeddingsConfiguration": {
+        "title": "EmbeddingsConfiguration",
+        "type": "object",
+        "properties": {
+          "model": {
+            "title": "Model",
+            "type": "string",
+            "description": "The model of the NLP Provider"
+          },
+          "providers": {
+            "title": "Providers",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmbeddingsProvider"
+            },
+            "description": "List of NLPProvider configurations to use for generating embeddings"
+          }
+        }
+      },
+      "EmbeddingsProvider": {
+        "title": "EmbeddingsProvider",
+        "required": [
+          "platform",
+          "platform_url",
+          "platform_api_key",
+          "model"
+        ],
+        "type": "object",
+        "properties": {
+          "platform": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NLPPlatform"
+              }
+            ],
+            "description": "The platform of the provider"
+          },
+          "platform_url": {
+            "title": "Platform Url",
+            "type": "string",
+            "description": "The API URL of the provider"
+          },
+          "platform_api_key": {
+            "title": "Platform Api Key",
+            "type": "string",
+            "description": "The API Key to use"
+          },
+          "model": {
+            "title": "Model",
+            "type": "string",
+            "description": "The model of the NLP Provider"
+          },
+          "seed": {
+            "title": "Seed",
+            "type": "integer",
+            "description": "If specified, some NLP Providers will make a best effort to sample deterministically."
+          }
+        }
+      },
+      "ExtractedParameter": {
+        "title": "ExtractedParameter",
+        "required": [
+          "key",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "value": {
+            "title": "Value",
+            "type": "string"
+          }
+        }
+      },
+      "GeneralPipelineConfiguration": {
+        "title": "GeneralPipelineConfiguration",
+        "type": "object",
+        "properties": {
+          "article_format": {
+            "title": "Article format template",
+            "type": "string",
+            "description": "The template to use when constructing the training text that represents each article. Available placeholders include: title, group, body, tags and url",
+            "default": "{{title}} ({{group}})\n\n{{body}}"
+          },
+          "corpus_language": {
+            "title": "Language of the provided corpus",
+            "type": "string",
+            "description": "The language which we expect the corpus of the Pipeline",
+            "default": "en"
+          },
+          "native_languages": {
+            "title": "Pipeline native languages",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of languages that are considered native to the LLMs and don't require translation",
+            "default": [
+              "en"
+            ]
+          },
+          "default_native_language": {
+            "title": "Default native language",
+            "type": "string",
+            "description": "This is the target language that is used when translating text that is a non-native language",
+            "default": "en"
+          },
+          "return_confidence": {
+            "title": "Instruct the Pipeline to return a confidence score",
+            "type": "boolean",
+            "description": "If set to True, the Pipeline will return a confidence score for each response",
+            "default": false
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "LLMTranslationProvider": {
+        "title": "LLMTranslationProvider",
+        "required": [
+          "type",
+          "platform",
+          "platform_url",
+          "platform_api_key",
+          "model"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Translation Provider type",
+            "enum": [
+              "LLM"
+            ],
+            "type": "string",
+            "description": "Must be set to LLM to define a LLMTranslationProvider"
+          },
+          "platform": {
+            "title": "Provider platform",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TranslationPlatform"
+              }
+            ]
+          },
+          "platform_url": {
+            "title": "Provider service URL",
+            "type": "string"
+          },
+          "platform_api_key": {
+            "title": "Provider API Key",
+            "type": "string"
+          },
+          "model": {
+            "title": "The model of the NLP Provider",
+            "type": "string"
+          },
+          "seed": {
+            "title": "LLM inference seed",
+            "type": "integer",
+            "description": "If specified, some NLP Providers will make a best effort to sample deterministically."
+          },
+          "prompt": {
+            "title": "LLM translation prompt",
+            "type": "string",
+            "description": "A prompt to use for translations, when using an LLM as a translator"
+          }
+        }
+      },
+      "NLPPlatform": {
+        "title": "NLPPlatform",
+        "enum": [
+          "OPENAI",
+          "AZURE",
+          "AZURE_OPENAI",
+          "ANYSCALE",
+          "GOOGLE_GENAI"
+        ],
+        "type": "string",
+        "description": "NLPPlatform is an enumeration of different Natural Language Processing (NLP) platforms."
+      },
+      "NLPPlatformScope": {
+        "title": "NLPPlatformScope",
+        "enum": [
+          "EMBEDDINGS",
+          "CHAT",
+          "QUERY_SUMMARIZATION",
+          "TRANSLATION"
+        ],
+        "type": "string",
+        "description": "Enum class representing the different scopes of NLP platforms."
+      },
+      "Pipeline": {
+        "title": "Pipeline",
+        "required": [
+          "id",
+          "name",
+          "vdb_collection",
+          "status",
+          "configuration",
+          "created_at",
+          "updated_at"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Pipeline unique identifier",
+            "type": "string"
+          },
+          "name": {
+            "title": "Pipeline name",
+            "type": "string",
+            "description": "The name of the Pipeline. Does not have to be unique"
+          },
+          "tenant_id": {
+            "title": "Tenant id",
+            "type": "string",
+            "description": "Optionally provide an identifier of the tenant using this Pipeline"
+          },
+          "organization_id": {
+            "title": "Organization id",
+            "type": "string",
+            "description": "Optionally provide an identifier of the organization that the tenant using this Pipeline belongs to"
+          },
+          "vdb_collection": {
+            "title": "Vector DB collection of this Pipeline.",
+            "type": "string",
+            "description": "This is where where vectors of the corpus of this Pipelines are held."
+          },
+          "status": {
+            "title": "The current status of the Pipeline",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PipelineStatus"
+              }
+            ],
+            "description": "The status is set to INITIALIZED when the Pipeline is first created. During a training is set to TRAINING and after a successful training is set to TRAINED. If the training fails, the status is set to FAILED"
+          },
+          "consumed_llm_tokens": {
+            "title": "Consumed Llm Tokens",
+            "type": "integer"
+          },
+          "configuration": {
+            "title": "The configuration of the Pipeline",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PipelineConfiguration"
+              }
+            ],
+            "description": "The configuration of this Pipeline"
+          },
+          "created_at": {
+            "title": "The date when this Pipeline was created",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "title": "The date when this Pipeline was last updated",
+            "type": "string",
+            "format": "date-time"
+          },
+          "last_trained_at": {
+            "title": "The date when this Pipeline was last trained",
+            "type": "string",
+            "format": "date-time"
+          },
+          "last_used_at": {
+            "title": "The date when this Pipeline was last used",
+            "type": "string",
+            "format": "date-time"
+          },
+          "docs": {
+            "title": "The details of the Pipeline",
+            "type": "object",
+            "description": "The details of the Pipeline"
+          }
+        }
+      },
+      "PipelineAnalytics": {
+        "title": "PipelineAnalytics",
+        "required": [
+          "id",
+          "pipeline_id",
+          "record_type",
+          "operation",
+          "provider",
+          "metric",
+          "record_value",
+          "created_at"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "pipeline_id": {
+            "title": "Pipeline Id",
+            "type": "string"
+          },
+          "tenant_id": {
+            "title": "Tenant Id",
+            "type": "string"
+          },
+          "organization_id": {
+            "title": "Organization Id",
+            "type": "string"
+          },
+          "session_id": {
+            "title": "Session Id",
+            "type": "string"
+          },
+          "record_type": {
+            "title": "Record Type",
+            "type": "string"
+          },
+          "operation": {
+            "title": "Operation",
+            "type": "string"
+          },
+          "provider": {
+            "title": "Provider",
+            "type": "string"
+          },
+          "model": {
+            "title": "Model",
+            "type": "string"
+          },
+          "metric": {
+            "title": "Metric",
+            "type": "string"
+          },
+          "record_value": {
+            "title": "Record Value",
+            "type": "integer"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PipelineAnalyticsAggregatedResponse": {
+        "title": "PipelineAnalyticsAggregatedResponse",
+        "required": [
+          "result",
+          "total_requests",
+          "usage_summary"
+        ],
+        "type": "object",
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PipelineAnalyticsAggregatedResponseItem"
+            }
+          },
+          "total_requests": {
+            "title": "Total Requests",
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "usage_summary": {
+            "title": "Usage Summary",
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "PipelineAnalyticsAggregatedResponseItem": {
+        "title": "PipelineAnalyticsAggregatedResponseItem",
+        "required": [
+          "record_type",
+          "provider",
+          "operation",
+          "metric",
+          "request_count",
+          "total_usage"
+        ],
+        "type": "object",
+        "properties": {
+          "record_type": {
+            "title": "Record Type",
+            "type": "string"
+          },
+          "provider": {
+            "title": "Provider",
+            "type": "string"
+          },
+          "operation": {
+            "title": "Operation",
+            "type": "string"
+          },
+          "model": {
+            "title": "Model",
+            "type": "string"
+          },
+          "metric": {
+            "title": "Metric",
+            "type": "string"
+          },
+          "request_count": {
+            "title": "Request Count",
+            "type": "integer"
+          },
+          "total_usage": {
+            "title": "Total Usage",
+            "type": "integer"
+          }
+        }
+      },
+      "PipelineAnalyticsPaginatedResponse": {
+        "title": "PipelineAnalyticsPaginatedResponse",
+        "required": [
+          "count",
+          "items",
+          "page",
+          "pageSize"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PipelineAnalytics"
+            }
+          },
+          "page": {
+            "title": "Page",
+            "type": "integer"
+          },
+          "pageSize": {
+            "title": "Pagesize",
+            "type": "integer"
+          }
+        }
+      },
+      "PipelineConfiguration": {
+        "title": "PipelineConfiguration",
+        "type": "object",
+        "properties": {
+          "general_settings": {
+            "title": "General Pipeline settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeneralPipelineConfiguration"
+              }
+            ],
+            "description": "Contains general configurations such as language settings and article format"
+          },
+          "translation": {
+            "title": "Language translation providers settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TranslationConfiguration"
+              }
+            ],
+            "description": "Contains configuration of translation providers that can be used when translations are needed within the various actions of this Pipeline"
+          },
+          "embeddings": {
+            "title": "Embeddings creation settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EmbeddingsConfiguration"
+              }
+            ],
+            "description": "Contains configuration of embeddings providers that are used when vectorizing corpus or queries"
+          },
+          "semantic_search": {
+            "title": "Semantic Search settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SemanticSearchConfiguration"
+              }
+            ],
+            "description": "Contains configuration for the Retrieval phase of RAG (e.g. top-k)If set to null, this functionality is disabled."
+          },
+          "text_generation": {
+            "title": "Configuration of the Text Generation phase of the Pipeline",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TextGenerationConfiguration"
+              }
+            ],
+            "description": "Contains configuration of LLM providers, the prompt to use, max_tokens, etcIf set to null, this functionality is disabled."
+          },
+          "chat_history": {
+            "title": "Chat history configuration",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ChatHistoryConfiguration"
+              }
+            ],
+            "description": "Contains settings for the local chat history, such as the number of messages to keep.If set to null, this functionality is disabled."
+          },
+          "sem_cache": {
+            "title": "SemCache configuration",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SemCacheConfiguration"
+              }
+            ],
+            "description": "Contains settings for enabling Semantic Cache (experimental)If set to null, this functionality is disabled."
+          },
+          "query_summarization": {
+            "title": "User query summarization configuration",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QuerySummarizationConfiguration"
+              }
+            ],
+            "description": "Contains settings for enabling user query summarization. Query summarization (aka history reduction) uses the previous conversation to rewrite the last user message with more context from the previous messages. This technique can be used to enable history in RAG architectures, when queries may refer to previous answers.Works only in conjunction with chat history. If set to null, this functionality is disabled."
+          }
+        }
+      },
+      "PipelineCreate": {
+        "title": "PipelineCreate",
+        "required": [
+          "name",
+          "configuration"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Pipeline unique identifier",
+            "type": "string",
+            "description": "If none is provided when creating a Pipeline, a random GUID type 4 is automatically generated"
+          },
+          "name": {
+            "title": "Pipeline name",
+            "type": "string",
+            "description": "The name of the Pipeline. Does not have to be unique"
+          },
+          "tenant_id": {
+            "title": "Tenant id",
+            "type": "string",
+            "description": "Optionally provide an identifier of the tenant using this Pipeline"
+          },
+          "organization_id": {
+            "title": "Organization id",
+            "type": "string",
+            "description": "Optionally provide an identifier of the organization that the tenant using this Pipeline belongs to"
+          },
+          "vdb_collection": {
+            "title": "Vector DB collection of this Pipeline.",
+            "type": "string",
+            "description": "This is where where vectors of the corpus of this Pipelines are held.If none is given (default) an existing collection is allocated to this Pipeline"
+          },
+          "configuration": {
+            "title": "The configuration of the Pipeline",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PipelineConfiguration"
+              }
+            ],
+            "description": "The configuration of this Pipeline"
+          }
+        }
+      },
+      "PipelinePaginatedResult": {
+        "title": "PipelinePaginatedResult",
+        "required": [
+          "count",
+          "items",
+          "page",
+          "pageSize"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Pipeline"
+            }
+          },
+          "page": {
+            "title": "Page",
+            "type": "integer"
+          },
+          "pageSize": {
+            "title": "Pagesize",
+            "type": "integer"
+          }
+        }
+      },
+      "PipelineProcess": {
+        "title": "PipelineProcess",
+        "required": [
+          "query"
+        ],
+        "type": "object",
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "query_language": {
+            "title": "Query Language",
+            "type": "string"
+          },
+          "session_id": {
+            "title": "Session Id",
+            "type": "string"
+          },
+          "max_results": {
+            "title": "Max Results",
+            "type": "integer",
+            "default": 0
+          },
+          "previous_messages": {
+            "title": "Previous Messages",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChatMessage"
+            }
+          },
+          "parameters": {
+            "title": "Parameters",
+            "type": "object"
+          },
+          "filters": {
+            "$ref": "#/components/schemas/VectorFilters"
+          },
+          "response_options": {
+            "$ref": "#/components/schemas/PipelineProcessResponseOptions"
+          }
+        }
+      },
+      "PipelineProcessResponseOptions": {
+        "title": "PipelineProcessResponseOptions",
+        "type": "object",
+        "properties": {
+          "return_examined_corpus_str": {
+            "title": "Return Examined Corpus Str",
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "PipelineProcessResult": {
+        "title": "PipelineProcessResult",
+        "required": [
+          "query"
+        ],
+        "type": "object",
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "query_processed": {
+            "title": "Query Processed",
+            "type": "string"
+          },
+          "query_language": {
+            "title": "Query Language",
+            "type": "string"
+          },
+          "detected_language": {
+            "title": "Detected Language",
+            "type": "string"
+          },
+          "generated_text": {
+            "title": "Generated Text",
+            "type": "string"
+          },
+          "generated_text_parsed": {
+            "title": "Generated Text Parsed",
+            "type": "string"
+          },
+          "generated_text_raw": {
+            "title": "Generated Text Raw",
+            "type": "string"
+          },
+          "extracted_parameters": {
+            "title": "Extracted Parameters",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtractedParameter"
+            }
+          },
+          "extracted_parameters_dict": {
+            "title": "Extracted Parameters Dict",
+            "type": "object"
+          },
+          "examined_corpus": {
+            "title": "Examined Corpus",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SearchResultCorpus"
+            }
+          },
+          "examined_corpus_str": {
+            "title": "Examined Corpus Str",
+            "type": "string"
+          },
+          "matched_corpus": {
+            "$ref": "#/components/schemas/SearchResultCorpus"
+          },
+          "llm_tokens": {
+            "title": "Llm Tokens",
+            "type": "integer"
+          },
+          "confidence": {
+            "title": "Confidence",
+            "type": "number"
+          }
+        }
+      },
+      "PipelineSearch": {
+        "title": "PipelineSearch",
+        "required": [
+          "query"
+        ],
+        "type": "object",
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "response_options": {
+            "$ref": "#/components/schemas/PipelineSearchResponseOptions"
+          },
+          "filters": {
+            "$ref": "#/components/schemas/VectorFilters"
+          },
+          "max_results": {
+            "title": "Max Results",
+            "type": "integer"
+          },
+          "session_id": {
+            "title": "Session Id",
+            "type": "string"
+          }
+        }
+      },
+      "PipelineSearchResponseOptions": {
+        "title": "PipelineSearchResponseOptions",
+        "type": "object",
+        "properties": {
+          "return_examined_corpus_str": {
+            "title": "Return Examined Corpus Str",
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "PipelineSearchResult": {
+        "title": "PipelineSearchResult",
+        "required": [
+          "query"
+        ],
+        "type": "object",
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "examined_corpus": {
+            "title": "Examined Corpus",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SearchResultCorpus"
+            }
+          },
+          "examined_corpus_str": {
+            "title": "Examined Corpus Str",
+            "type": "string"
+          }
+        }
+      },
+      "PipelineStatus": {
+        "title": "PipelineStatus",
+        "enum": [
+          "INITIALIZED",
+          "TRAINING",
+          "READY",
+          "FAILED",
+          "OUTDATED"
+        ],
+        "type": "string",
+        "description": "Enum class representing the different statuses of a pipeline."
+      },
+      "PipelineUpdate": {
+        "title": "PipelineUpdate",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Pipeline unique identifier",
+            "type": "string"
+          },
+          "name": {
+            "title": "Pipeline name",
+            "type": "string",
+            "description": "The name of the Pipeline. Does not have to be unique"
+          },
+          "tenant_id": {
+            "title": "Tenant id",
+            "type": "string",
+            "description": "Optionally provide an identifier of the tenant using this Pipeline"
+          },
+          "organization_id": {
+            "title": "Organization id",
+            "type": "string",
+            "description": "Optionally provide an identifier of the organization that the tenant using this Pipeline belongs to"
+          },
+          "status": {
+            "title": "The current status of the Pipeline",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PipelineStatus"
+              }
+            ],
+            "description": "The status is set to INITIALIZED when the Pipeline is first created. During a training is set to TRAINING and after a successful training is set to TRAINED. If the training fails, the status is set to FAILED"
+          },
+          "configuration": {
+            "title": "The configuration of the Pipeline",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PipelineConfiguration"
+              }
+            ],
+            "description": "The configuration of this Pipeline"
+          }
+        }
+      },
+      "QuerySummarizationConfiguration": {
+        "title": "QuerySummarizationConfiguration",
+        "type": "object",
+        "properties": {
+          "providers": {
+            "title": "List of TextGenerationProvider to use for text generation",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextGenerationProvider"
+            }
+          },
+          "prompt": {
+            "title": "The prompt to use  when invoking the LLM",
+            "type": "string"
+          },
+          "max_tokens": {
+            "title": "The maximum number of tokens to use when invoking the LLM",
+            "type": "integer",
+            "default": 50
+          },
+          "temperature": {
+            "title": "The temperature to use when invoking the LLM",
+            "type": "number",
+            "default": 0.2
+          },
+          "parser": {
+            "title": "Query summarization parser",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QuerySummarizationParserConfigurationJSON"
+              },
+              {
+                "$ref": "#/components/schemas/QuerySummarizationParserConfigurationText"
+              }
+            ],
+            "description": "The parser to use to extract the query summarization",
+            "default": {
+              "type": "REGEX",
+              "regex": "\\s*user:\\s?(.+)\\s*"
+            }
+          },
+          "hide_urls": {
+            "title": "Hide URLs when passing corpus to external service",
+            "type": "boolean",
+            "description": "When enabled, replaces urls with UUIDs before passing corpus to external service for text generation.",
+            "default": false
+          },
+          "normalize_user_input": {
+            "title": "Normalize user input",
+            "type": "boolean",
+            "default": false
+          },
+          "query": {
+            "title": "Query summarization query template",
+            "type": "string",
+            "description": "The template of the query to send sending the request to the LLM. Available placeholders: - {{dialog}}: the current dialog constructed using previous (history) messages"
+          },
+          "skip_history_in_inference": {
+            "title": "Skip history in inference",
+            "type": "boolean",
+            "description": "If query summarization is enabled and this property is set to True, the history of the dialog will not be used during inference",
+            "default": true
+          },
+          "use_summary_in_sem_search": {
+            "title": "Use the query summarization in semantic search",
+            "type": "boolean",
+            "description": "If this property is set to True, the query summarization will be used during semantic search",
+            "default": true
+          },
+          "use_summary_in_generation": {
+            "title": "Use the query summarization in generation phase",
+            "type": "boolean",
+            "description": "If this property is set to True, the query summarization will be used during text generation and will also be stored in history",
+            "default": true
+          },
+          "enhance_sem_search_with_summary": {
+            "title": "Enhance semantic search with additional search based on summary",
+            "type": "boolean",
+            "description": "If this property is set to True, the query summarization will be used during Semantic Search to add additional k corpus items in the text generation context",
+            "default": false
+          },
+          "enabled": {
+            "title": "Determines if the query summarization feature is enabled.",
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "QuerySummarizationParserConfigurationJSON": {
+        "title": "QuerySummarizationParserConfigurationJSON",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Defines a json type parser",
+            "enum": [
+              "JSON"
+            ],
+            "type": "string",
+            "default": "JSON"
+          }
+        }
+      },
+      "QuerySummarizationParserConfigurationText": {
+        "title": "QuerySummarizationParserConfigurationText",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Defines a text type parser",
+            "enum": [
+              "REGEX"
+            ],
+            "type": "string",
+            "description": "TEXT parsers must also define a regular expression which will be used to extract the query summarization from the LLM response",
+            "default": "REGEX"
+          },
+          "regex": {
+            "title": "Regex to use when extracting the query summary from the LLM response",
+            "type": "string",
+            "description": "The regex to apply when extracting the query summarization. If None is set, the default will be used: \\s*user:\\s?(.+)\\s*",
+            "default": "\\s*user:\\s?(.+)\\s*"
+          }
+        }
+      },
+      "RemoteGlossaryConfig": {
+        "title": "RemoteGlossaryConfig",
+        "required": [
+          "uri"
+        ],
+        "type": "object",
+        "properties": {
+          "uri": {
+            "title": "Uri",
+            "type": "string",
+            "description": "The Unique Resource Identifier for the glossary"
+          }
+        }
+      },
+      "SearchResultCorpus": {
+        "title": "SearchResultCorpus",
+        "required": [
+          "id",
+          "title",
+          "body"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Corpus Item unique identifier",
+            "type": "string"
+          },
+          "shared_corpus_id": {
+            "title": "Shared Corpus Item unique identifier",
+            "type": "string"
+          },
+          "need_training": {
+            "title": "Defines whether this Corpus Item needs training",
+            "type": "boolean"
+          },
+          "title": {
+            "title": "Title of the Corpus Item",
+            "type": "string"
+          },
+          "body": {
+            "title": "Body of the Corpus Item",
+            "type": "string"
+          },
+          "training_text": {
+            "title": "Training Text",
+            "type": "string"
+          },
+          "group": {
+            "title": "Group",
+            "type": "string"
+          },
+          "language": {
+            "title": "Language",
+            "type": "string",
+            "description": "The language of this item",
+            "default": "en"
+          },
+          "tags": {
+            "title": "Tags",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "pipeline_id": {
+            "title": "Pipeline Id",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "score": {
+            "title": "Score",
+            "type": "number",
+            "default": 0
+          }
+        }
+      },
+      "SemCacheConfiguration": {
+        "title": "SemCacheConfiguration",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "title": "Determines if the SemCache service should be used",
+            "type": "boolean",
+            "default": false
+          },
+          "cache_uuid": {
+            "title": "SemCache cache uuid",
+            "type": "string"
+          },
+          "api_key": {
+            "title": "The api key used to interact with the SemCache service",
+            "type": "string"
+          }
+        }
+      },
+      "SemanticSearchConfiguration": {
+        "title": "SemanticSearchConfiguration",
+        "type": "object",
+        "properties": {
+          "max_results": {
+            "title": "Max Results",
+            "type": "integer",
+            "default": 0
+          },
+          "normalize_user_input": {
+            "title": "Normalize user input",
+            "type": "boolean",
+            "default": false
+          },
+          "normalize_corpus": {
+            "title": "Normalize corpus",
+            "type": "boolean",
+            "default": false
+          },
+          "enabled": {
+            "title": "Determines if the semantic search feature is enabled.",
+            "type": "boolean",
+            "default": true
+          },
+          "max_input_tokens": {
+            "title": "Max Input Tokens",
+            "type": "integer",
+            "default": 0
+          },
+          "exact_match": {
+            "title": "Prefer exact match when searching (slower)",
+            "type": "boolean",
+            "default": false
+          },
+          "visit_neighbors": {
+            "title": "Number of neighbors to visit during search (higher value = better accuracy, slower speed).",
+            "type": "integer",
+            "default": 128
+          }
+        }
+      },
+      "SystemNLPProvider": {
+        "title": "SystemNLPProvider",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "platform": {
+            "$ref": "#/components/schemas/NLPPlatform"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/NLPPlatformScope"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "api_key": {
+            "title": "Api Key",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SystemNLPProviderCreate": {
+        "title": "SystemNLPProviderCreate",
+        "required": [
+          "platform",
+          "scope",
+          "url",
+          "api_key"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "platform": {
+            "$ref": "#/components/schemas/NLPPlatform"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/NLPPlatformScope"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "api_key": {
+            "title": "Api Key",
+            "type": "string"
+          }
+        }
+      },
+      "TextGenerationConfiguration": {
+        "title": "TextGenerationConfiguration",
+        "type": "object",
+        "properties": {
+          "providers": {
+            "title": "List of TextGenerationProvider to use for text generation",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextGenerationProvider"
+            }
+          },
+          "prompt": {
+            "title": "The prompt to use  when invoking the LLM",
+            "type": "string"
+          },
+          "max_tokens": {
+            "title": "The maximum number of tokens to use when invoking the LLM",
+            "type": "integer",
+            "default": 50
+          },
+          "temperature": {
+            "title": "The temperature to use when invoking the LLM",
+            "type": "number",
+            "default": 0.2
+          },
+          "parser": {
+            "title": "The parser to use to extract information from the LLM response",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TextGenerationParserConfigurationJSON"
+              },
+              {
+                "$ref": "#/components/schemas/TextGenerationParserConfigurationREGEX"
+              }
+            ],
+            "description": "In RAG architectures, we typically need to extract the article id, and the generated text. The parser defined in this section allows the extraction of this information from the LLM response. This can be either a REGEX parser or a JSON. In both cases, the prompt must be configured in such a way that instucts the LLM to reply with a text that can be effectively parsed.",
+            "default": {
+              "type": "REGEX",
+              "regex": "\\(ID:(.*?)\\)([\\s\\S]*)"
+            }
+          },
+          "hide_urls": {
+            "title": "Hide URLs when passing corpus to external service",
+            "type": "boolean",
+            "description": "When enabled, replaces urls with UUIDs before passing corpus to external service for text generation.",
+            "default": false
+          },
+          "normalize_user_input": {
+            "title": "Normalize user input",
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "TextGenerationParserConfigurationJSON": {
+        "title": "TextGenerationParserConfigurationJSON",
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "enum": [
+              "JSON"
+            ],
+            "type": "string"
+          }
+        }
+      },
+      "TextGenerationParserConfigurationREGEX": {
+        "title": "TextGenerationParserConfigurationREGEX",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "enum": [
+              "REGEX"
+            ],
+            "type": "string",
+            "description": "Defines a text type of LLMResponseParserConfiguration",
+            "default": "REGEX"
+          },
+          "regex": {
+            "title": "Regex",
+            "type": "string",
+            "description": "The regex to apply when parsing the llm response. If None is set, the default will be used:\\(ID:(.*?)\\)([\\s\\S]*)",
+            "default": "\\(ID:(.*?)\\)([\\s\\S]*)"
+          }
+        }
+      },
+      "TextGenerationProvider": {
+        "title": "TextGenerationProvider",
+        "required": [
+          "platform",
+          "platform_url",
+          "platform_api_key",
+          "model"
+        ],
+        "type": "object",
+        "properties": {
+          "platform": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NLPPlatform"
+              }
+            ],
+            "description": "The platform of the provider"
+          },
+          "platform_url": {
+            "title": "Platform Url",
+            "type": "string",
+            "description": "The API URL of the provider"
+          },
+          "platform_api_key": {
+            "title": "Platform Api Key",
+            "type": "string",
+            "description": "The API Key to use"
+          },
+          "model": {
+            "title": "Model",
+            "type": "string",
+            "description": "The model of the NLP Provider"
+          },
+          "seed": {
+            "title": "Seed",
+            "type": "integer",
+            "description": "If specified, some NLP Providers will make a best effort to sample deterministically."
+          }
+        }
+      },
+      "Token": {
+        "title": "Token",
+        "required": [
+          "role",
+          "iat",
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "role": {
+            "title": "Role",
+            "type": "string"
+          },
+          "pipeline_id": {
+            "title": "Pipeline Id",
+            "type": "string"
+          },
+          "iat": {
+            "title": "Iat",
+            "type": "integer"
+          },
+          "token": {
+            "title": "Token",
+            "type": "string"
+          }
+        }
+      },
+      "TokenCreate": {
+        "title": "TokenCreate",
+        "required": [
+          "role"
+        ],
+        "type": "object",
+        "properties": {
+          "role": {
+            "title": "Role",
+            "type": "string"
+          },
+          "pipeline_id": {
+            "title": "Pipeline Id",
+            "type": "string"
+          }
+        }
+      },
+      "TranslationConfiguration": {
+        "title": "TranslationConfiguration",
+        "required": [
+          "query_translation_providers",
+          "response_translation_providers",
+          "corpus_translation_providers"
+        ],
+        "type": "object",
+        "properties": {
+          "query_translation_providers": {
+            "title": "The providers to use for translations of incoming messages",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ClassicTranslationProvider"
+                },
+                {
+                  "$ref": "#/components/schemas/LLMTranslationProvider"
+                }
+              ]
+            },
+            "description": "If more than one provider is configured, the service will use the next in the list when any error occurs while using one of them."
+          },
+          "response_translation_providers": {
+            "title": "The provider to use for translations of responses",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ClassicTranslationProvider"
+                },
+                {
+                  "$ref": "#/components/schemas/LLMTranslationProvider"
+                }
+              ]
+            },
+            "description": "If more than one provider is configured, the service will use the next in the list when any error occurs while using one of them."
+          },
+          "corpus_translation_providers": {
+            "title": "The provider to use for translations of corpus",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ClassicTranslationProvider"
+                },
+                {
+                  "$ref": "#/components/schemas/LLMTranslationProvider"
+                }
+              ]
+            },
+            "description": "If more than one provider is configured, the service will use the next in the list when any error occurs while using one of them."
+          },
+          "hide_urls": {
+            "title": "Hide URLs when translating",
+            "type": "boolean",
+            "description": "When enabled, replaces urls with UUIDs before processing translations. URLs are then restored after translation.",
+            "default": false
+          },
+          "enabled": {
+            "title": "Determines if the translation feature is enabled.",
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "TranslationPlatform": {
+        "title": "TranslationPlatform",
+        "enum": [
+          "AZURE",
+          "GOOGLE",
+          "GOOGLE_GENAI",
+          "OPENAI",
+          "AZURE_OPENAI"
+        ],
+        "type": "string",
+        "description": "Enum class representing different supported translation platforms."
+      },
+      "VDBCollectionAllocation": {
+        "title": "VDBCollectionAllocation",
+        "required": [
+          "name",
+          "items",
+          "pipelines_count",
+          "pipelines"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "items": {
+            "title": "Items",
+            "type": "integer"
+          },
+          "pipelines_count": {
+            "title": "Pipelines Count",
+            "type": "integer"
+          },
+          "pipelines": {
+            "title": "Pipelines",
+            "type": "array",
+            "items": {}
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      },
+      "VectorFilters": {
+        "title": "VectorFilters",
+        "type": "object",
+        "properties": {
+          "include_tags": {
+            "title": "Include Tags",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "exclude_tags": {
+            "title": "Exclude Tags",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "JWTBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

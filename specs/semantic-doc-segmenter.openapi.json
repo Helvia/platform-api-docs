@@ -1,0 +1,1122 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Helvia.ai Semantic Document Segmenter",
+    "description": "Helvia.ai Semantic Document Segmenter",
+    "contact": {
+      "name": "Helvia.ai",
+      "url": "https://helvia.ai/",
+      "email": "contact@helvia.ai"
+    },
+    "version": "1.1.0"
+  },
+  "paths": {
+    "/jobs": {
+      "post": {
+        "tags": [
+          "Jobs resources"
+        ],
+        "summary": "Post Jobs",
+        "description": "accept a document for processing",
+        "operationId": "post_jobs_jobs_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_post_jobs_jobs_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessDocReplySchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/jobs/": {
+      "get": {
+        "tags": [
+          "Jobs resources"
+        ],
+        "summary": "Get Jobs",
+        "description": "return a list of all jobs",
+        "operationId": "get_jobs_jobs__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobsReplySchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/jobs/{jobid}": {
+      "get": {
+        "tags": [
+          "Jobs resources"
+        ],
+        "summary": "Get Job",
+        "description": "return the details of one job",
+        "operationId": "get_job_jobs__jobid__get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "jobid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Jobid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Jobs resources"
+        ],
+        "summary": "Cancel Job",
+        "description": "cancel a job",
+        "operationId": "cancel_job_jobs__jobid__patch",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "jobid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Jobid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelJobSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Jobs resources"
+        ],
+        "summary": "Delete Job",
+        "description": "delete a job and all related documents",
+        "operationId": "delete_job_jobs__jobid__delete",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "jobid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Jobid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents/": {
+      "get": {
+        "tags": [
+          "Documents resources"
+        ],
+        "summary": "Documents",
+        "description": "return all documents",
+        "operationId": "documents_documents__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentsReplySchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/documents/{documentid}": {
+      "get": {
+        "tags": [
+          "Documents resources"
+        ],
+        "summary": "Get Document",
+        "description": "return a single document",
+        "operationId": "get_document_documents__documentid__get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "documentid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Documentid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents/{documentid}/segments": {
+      "get": {
+        "tags": [
+          "Documents resources"
+        ],
+        "summary": "Document Segments",
+        "description": "return all document segments",
+        "operationId": "document_segments_documents__documentid__segments_get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "documentid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Documentid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SegmentsReply"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents/{documentid}/segments/{segmentid}": {
+      "get": {
+        "tags": [
+          "Documents resources"
+        ],
+        "summary": "Document Segment",
+        "description": "return a document segment",
+        "operationId": "document_segment_documents__documentid__segments__segmentid__get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "documentid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Documentid"
+            }
+          },
+          {
+            "name": "segmentid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Segmentid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SegmentsReply"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/debug/jobs/{job_id}": {
+      "get": {
+        "tags": [
+          "Debug resources"
+        ],
+        "summary": "Get Job Debug Info",
+        "description": "Get detailed debug information for a specific job",
+        "operationId": "get_job_debug_info_debug_jobs__job_id__get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/debug/health": {
+      "get": {
+        "tags": [
+          "Debug resources"
+        ],
+        "summary": "Get Health Info",
+        "description": "Get service health and pending job information",
+        "operationId": "get_health_info_debug_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/debug/health_with_details": {
+      "get": {
+        "tags": [
+          "Debug resources"
+        ],
+        "summary": "Get Health Detailed Info",
+        "description": "Get detailed service health with job IDs and timestamps",
+        "operationId": "get_health_detailed_info_debug_health_with_details_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Root",
+        "description": "This is the root endpoint",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_post_jobs_jobs_post": {
+        "properties": {
+          "uploadfile": {
+            "type": "string",
+            "format": "binary",
+            "title": "Uploadfile"
+          },
+          "doctype": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doctype",
+            "default": ""
+          },
+          "maxsize": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Maxsize",
+            "default": 50000
+          },
+          "usetags": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Usetags",
+            "default": "[]"
+          },
+          "maxtags": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Maxtags",
+            "default": 1
+          },
+          "callbackurl": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Callbackurl"
+          },
+          "process_images": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Process Images",
+            "default": false
+          },
+          "pdf_parsing_backend": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pdf Parsing Backend",
+            "default": "pymupdf"
+          },
+          "enable_ocr": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Ocr",
+            "default": false
+          },
+          "ocr_backend": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ocr Backend"
+          },
+          "force_full_page_ocr": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Force Full Page Ocr",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "uploadfile"
+        ],
+        "title": "Body_post_jobs_jobs_post"
+      },
+      "CancelJobSchema": {
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/JobStatus"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "CancelJobSchema"
+      },
+      "DocumentSchema": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "status": {
+            "$ref": "#/components/schemas/DocumentStatus"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated"
+          },
+          "filename": {
+            "type": "string",
+            "title": "Filename"
+          },
+          "filesize": {
+            "type": "integer",
+            "title": "Filesize"
+          },
+          "mimetype": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mimetype"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "created",
+          "updated",
+          "filename",
+          "filesize",
+          "mimetype"
+        ],
+        "title": "DocumentSchema"
+      },
+      "DocumentStatus": {
+        "type": "string",
+        "enum": [
+          "PROCESSED",
+          "NEW",
+          "CANCELED"
+        ],
+        "title": "DocumentStatus"
+      },
+      "DocumentsReplySchema": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentSchema"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "DocumentsReplySchema"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "JobSchema": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "ip": {
+            "type": "string",
+            "title": "Ip"
+          },
+          "documentid": {
+            "type": "string",
+            "title": "Documentid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/JobStatus"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated"
+          },
+          "completed": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completed"
+          },
+          "maxsize": {
+            "type": "integer",
+            "title": "Maxsize"
+          },
+          "timeit": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timeit"
+          },
+          "callbackurl": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Callbackurl"
+          },
+          "progress": {
+            "type": "integer",
+            "title": "Progress"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "ip",
+          "documentid",
+          "status",
+          "created",
+          "updated",
+          "completed",
+          "maxsize",
+          "timeit",
+          "callbackurl",
+          "progress"
+        ],
+        "title": "JobSchema"
+      },
+      "JobStatus": {
+        "type": "string",
+        "enum": [
+          "NEW",
+          "PENDING",
+          "PROCESSING",
+          "COMPLETED",
+          "FAILED",
+          "CANCELED"
+        ],
+        "title": "JobStatus"
+      },
+      "JobsReplySchema": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/JobSchema"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "JobsReplySchema"
+      },
+      "ProcessDocReplySchema": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success"
+          },
+          "jobid": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Jobid"
+          },
+          "documentid": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Documentid"
+          }
+        },
+        "type": "object",
+        "required": [
+          "success",
+          "jobid",
+          "documentid"
+        ],
+        "title": "ProcessDocReplySchema"
+      },
+      "Segment": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "documentid": {
+            "type": "string",
+            "title": "Documentid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SegmentStatus"
+          },
+          "body": {
+            "type": "string",
+            "title": "Body"
+          },
+          "pagenr": {
+            "type": "integer",
+            "title": "Pagenr"
+          },
+          "group": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "tags": {
+            "anyOf": [
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tags"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated"
+          },
+          "timeit": {
+            "type": "integer",
+            "title": "Timeit"
+          },
+          "ordinal": {
+            "type": "integer",
+            "title": "Ordinal"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "documentid",
+          "status",
+          "body",
+          "pagenr",
+          "group",
+          "title",
+          "tags",
+          "lang",
+          "created",
+          "updated",
+          "timeit",
+          "ordinal"
+        ],
+        "title": "Segment"
+      },
+      "SegmentStatus": {
+        "type": "string",
+        "enum": [
+          "COMPLETED",
+          "FAILED"
+        ],
+        "title": "SegmentStatus"
+      },
+      "SegmentsReply": {
+        "properties": {
+          "segments": {
+            "items": {
+              "$ref": "#/components/schemas/Segment"
+            },
+            "type": "array",
+            "title": "Segments"
+          }
+        },
+        "type": "object",
+        "required": [
+          "segments"
+        ],
+        "title": "SegmentsReply"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "JWTBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

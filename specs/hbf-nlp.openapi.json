@@ -1,0 +1,1551 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_root",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "App"
+        ]
+      }
+    },
+    "/organizations/{orgId}/tenants/{tenantId}/process": {
+      "post": {
+        "operationId": "NLPController_processOrganizationTenant",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NLPProcessPipelineGenericDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NLPProcessResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Processes a message in a tenant",
+        "tags": [
+          "NLP"
+        ]
+      }
+    },
+    "/organizations/{orgId}/tenants/{tenantId}/nlp-pipelines/{pipelineId}/process": {
+      "post": {
+        "operationId": "NLPController_processOrganizationTenantPipeline",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pipelineId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NLPProcessPipelineSpecificDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NLPProcessResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Processes a message using a specific NLPPipeline",
+        "tags": [
+          "NLP"
+        ]
+      }
+    },
+    "/tenants/{tenantId}/process": {
+      "post": {
+        "operationId": "NLPController_processTenant",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NLPProcessPipelineGenericDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NLPProcessResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Processes a message in a tenant",
+        "tags": [
+          "NLP"
+        ]
+      }
+    },
+    "/organizations/{orgId}/tenants/{tenantId}/nlp-pipelines/{pipelineId}/train": {
+      "post": {
+        "operationId": "NLPController_trainOrganizationTenantPipeline",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pipelineId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "forceFullRetrain",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Operation"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Trains an NLP Pipeline",
+        "tags": [
+          "NLP"
+        ]
+      }
+    },
+    "/organizations/{orgId}/tenants/{tenantId}/train": {
+      "post": {
+        "operationId": "NLPController_trainOrganizationTenantPipelines",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "forceFullRetrain",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Operation"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Train the NLU linked to a tenant",
+        "tags": [
+          "NLP"
+        ]
+      }
+    },
+    "/tenants/{tenantId}/train": {
+      "post": {
+        "operationId": "NLPController_trainTenantPipelines",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "forceFullRetrain",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Operation"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Train the NLU linked to a tenant",
+        "tags": [
+          "NLP"
+        ]
+      }
+    },
+    "/nlp-pipelines/{pipelineId}/train": {
+      "post": {
+        "operationId": "NLPController_trainPipeline",
+        "parameters": [
+          {
+            "name": "pipelineId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "forceFullRetrain",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Operation"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Trains an NLP Pipeline",
+        "tags": [
+          "NLP"
+        ]
+      }
+    },
+    "/organizations/{orgId}/tenants/{tenantId}/sessions/{sessionId}/analyze": {
+      "post": {
+        "operationId": "LlmController_analyzeChatSession",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Operation"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Summarizes a chat session in a tenant",
+        "tags": [
+          "Llm"
+        ]
+      }
+    },
+    "/llm-request": {
+      "post": {
+        "operationId": "LlmController_llmRequest",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NLPParamExtractionRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LLMParameterizedResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Make a request to an llm",
+        "tags": [
+          "Llm"
+        ]
+      }
+    },
+    "/detect-language": {
+      "post": {
+        "operationId": "LlmController_languageDetection",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LanguageDetectionRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LanguageDetectionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Detect language",
+        "tags": [
+          "Llm"
+        ]
+      }
+    },
+    "/organizations/{orgId}/categories/{category}/prompt": {
+      "get": {
+        "operationId": "LlmController_getPromptForTenant",
+        "parameters": [
+          {
+            "name": "category",
+            "required": true,
+            "in": "path",
+            "description": "The category of the plugin for which the prompt is requested",
+            "schema": {
+              "enum": [
+                "AUTHENTICATION",
+                "CRM",
+                "KB",
+                "LIVECHAT",
+                "LLM_NODE",
+                "LLM_TOPIC_MODELLING",
+                "LLM_SUMMARIZATION",
+                "LLM_SEMANTIC_SEARCH_NODE",
+                "LLM_LANGUAGE_DETECTION",
+                "TICKETING",
+                "TRANSLATION"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "tags",
+            "required": false,
+            "in": "query",
+            "description": "Optional classification tags to be included in the prompt",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Retrieve a plugin's prompt",
+        "tags": [
+          "Llm"
+        ]
+      }
+    },
+    "/organizations/{orgId}/providers/{alias}/version": {
+      "get": {
+        "operationId": "LlmController_getLlmApiVersion",
+        "parameters": [
+          {
+            "name": "alias",
+            "required": true,
+            "in": "path",
+            "description": "The alias of the LLM provider (e.g., openai, azureai, gemini)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "apiVersion": {
+                      "type": "string",
+                      "example": "v1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get the API version of a given LLM provider",
+        "tags": [
+          "Llm"
+        ]
+      }
+    },
+    "/organizations/{orgId}/tenants/{tenantId}/messages/{messageId}/metadata": {
+      "get": {
+        "operationId": "MessageMetadataController_getByMessageId",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "messageId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageMetadata"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Gets the metadata of a message by message ID",
+        "tags": [
+          "Messages Metadata"
+        ]
+      }
+    },
+    "/v2/generation": {
+      "post": {
+        "operationId": "GenerationController_generation",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestWrapper"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Generates text based on the prompt",
+        "tags": [
+          "Generation"
+        ]
+      }
+    },
+    "/organizations/{orgId}/tenants/{tenantId}/test-sets/{testSetId}/runs": {
+      "post": {
+        "operationId": "TestSetController_runTestSet",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "testSetId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TestSetRunDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Operation"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a test set run",
+        "tags": [
+          "TestSet"
+        ]
+      }
+    },
+    "/models": {
+      "post": {
+        "operationId": "ModelController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Model"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a model",
+        "tags": [
+          "models"
+        ]
+      },
+      "get": {
+        "operationId": "ModelController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Model"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List models for a given provider",
+        "tags": [
+          "models"
+        ]
+      }
+    },
+    "/models/providers/{integrationType}": {
+      "get": {
+        "operationId": "ModelController_findByCriteria",
+        "parameters": [
+          {
+            "name": "integrationType",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "enum": [
+                "OIDC_AUTHENTICATION",
+                "MICROSOFT_DYNAMICS_CRM",
+                "MICROSOFT_DYNAMICS_KB",
+                "ZENDESK_TICKETING",
+                "HELVIA_LIVECHAT",
+                "OPEN_AI_LLM",
+                "AZURE_AI_LLM",
+                "GEMINI_AI_LLM",
+                "CISCO_LIVECHAT",
+                "ZENDESK_LIVECHAT",
+                "GENESYS_LIVECHAT"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "enabled",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Model"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List models for a given provider",
+        "tags": [
+          "models"
+        ]
+      }
+    },
+    "/models/name/{name}": {
+      "get": {
+        "operationId": "ModelController_findByName",
+        "parameters": [
+          {
+            "name": "name",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a model by name",
+        "tags": [
+          "models"
+        ]
+      }
+    },
+    "/models/{modelId}": {
+      "get": {
+        "operationId": "ModelController_findById",
+        "parameters": [
+          {
+            "name": "modelId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a model by id",
+        "tags": [
+          "models"
+        ]
+      },
+      "patch": {
+        "operationId": "ModelController_update",
+        "parameters": [
+          {
+            "name": "modelId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Model"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a model",
+        "tags": [
+          "models"
+        ]
+      },
+      "delete": {
+        "operationId": "ModelController_remove",
+        "parameters": [
+          {
+            "name": "modelId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a model",
+        "tags": [
+          "models"
+        ]
+      }
+    },
+    "/models/{modelId}/schema": {
+      "get": {
+        "operationId": "ModelController_findOneSchema",
+        "parameters": [
+          {
+            "name": "modelId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a model request example schema",
+        "tags": [
+          "models"
+        ]
+      }
+    },
+    "/models/clone/{modelId}": {
+      "post": {
+        "operationId": "ModelController_clone",
+        "parameters": [
+          {
+            "name": "modelId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Cloned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Clone a model",
+        "tags": [
+          "models"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "HBF-NLP",
+    "description": "HBF NLP Service",
+    "version": "1.2.2",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "Map": {
+        "type": "object",
+        "properties": {}
+      },
+      "NLPProcessPipelineGenericDto": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "cacheResult": {
+            "type": "boolean"
+          },
+          "saveMissedQuestion": {
+            "type": "boolean"
+          },
+          "messageId": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "object"
+          },
+          "variables": {
+            "example": {
+              "key": "value"
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Map"
+              }
+            ]
+          },
+          "language": {
+            "type": "string"
+          },
+          "detectLanguage": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "query",
+          "sessionId",
+          "cacheResult",
+          "saveMissedQuestion",
+          "messageId",
+          "parameters",
+          "variables",
+          "language",
+          "detectLanguage"
+        ]
+      },
+      "Corpus": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "confidence"
+        ]
+      },
+      "NLPProcessResponseDto": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "queryCategory": {
+            "type": "string"
+          },
+          "languageCode": {
+            "type": "string"
+          },
+          "detectedLanguage": {
+            "type": "string"
+          },
+          "examinedCorpus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Corpus"
+            }
+          },
+          "matchedCorpus": {
+            "$ref": "#/components/schemas/Corpus"
+          },
+          "generatedText": {
+            "type": "string"
+          },
+          "extractedParameters": {
+            "type": "object"
+          },
+          "systemId": {
+            "type": "string"
+          },
+          "systemType": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query",
+          "queryCategory",
+          "languageCode",
+          "detectedLanguage",
+          "examinedCorpus",
+          "matchedCorpus",
+          "generatedText",
+          "extractedParameters",
+          "systemId",
+          "systemType"
+        ]
+      },
+      "NLPProcessPipelineSpecificDto": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "cacheResult": {
+            "type": "boolean"
+          },
+          "saveMissedQuestion": {
+            "type": "boolean"
+          },
+          "messageId": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "query",
+          "sessionId",
+          "cacheResult",
+          "saveMissedQuestion",
+          "messageId",
+          "parameters"
+        ]
+      },
+      "LlmPropertiesDto": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "maxTokens": {
+            "type": "number"
+          },
+          "isResponseInJson": {
+            "type": "boolean"
+          },
+          "llmMessages": {
+            "description": "LLm messages for history",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "model",
+          "prompt",
+          "temperature",
+          "maxTokens",
+          "isResponseInJson",
+          "llmMessages"
+        ]
+      },
+      "NLPParamExtractionRequestDto": {
+        "type": "object",
+        "properties": {
+          "llmProvider": {
+            "type": "string"
+          },
+          "tenantId": {
+            "type": "string"
+          },
+          "configuration": {
+            "example": {
+              "model": "string",
+              "prompt": "string",
+              "temperature": 0,
+              "maxTokens": 0,
+              "isResponseInJson": true
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LlmPropertiesDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "llmProvider",
+          "tenantId",
+          "configuration"
+        ]
+      },
+      "LLMParameterizedResponse": {
+        "type": "object",
+        "properties": {
+          "reply": {
+            "type": "string"
+          },
+          "extractedParams": {
+            "type": "object"
+          },
+          "responseStatusCode": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "reply",
+          "extractedParams",
+          "responseStatusCode"
+        ]
+      },
+      "LanguageDetectionRequestDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "LanguageDetectionResponse": {
+        "type": "object",
+        "properties": {}
+      },
+      "MessageMetadata": {
+        "type": "object",
+        "properties": {}
+      },
+      "RequestWrapper": {
+        "type": "object",
+        "properties": {}
+      },
+      "TestSetRunDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "nlpPipelines": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "nlpPipelines",
+          "results",
+          "status",
+          "createdAt",
+          "updatedAt",
+          "createdBy"
+        ]
+      },
+      "IntegrationType": {
+        "type": "string",
+        "enum": [
+          "OIDC_AUTHENTICATION",
+          "MICROSOFT_DYNAMICS_CRM",
+          "MICROSOFT_DYNAMICS_KB",
+          "ZENDESK_TICKETING",
+          "HELVIA_LIVECHAT",
+          "OPEN_AI_LLM",
+          "AZURE_AI_LLM",
+          "GEMINI_AI_LLM",
+          "CISCO_LIVECHAT",
+          "ZENDESK_LIVECHAT",
+          "GENESYS_LIVECHAT"
+        ],
+        "description": "The integration provider type"
+      },
+      "ModelType": {
+        "type": "string",
+        "enum": [
+          "generative",
+          "reasoning",
+          "embedding"
+        ],
+        "description": "The category/capability type of the model"
+      },
+      "ModelPropertyAssociation": {
+        "type": "object",
+        "properties": {}
+      },
+      "ModelPropertyVisibility": {
+        "type": "object",
+        "properties": {}
+      },
+      "ModelProperty": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "association": {
+            "$ref": "#/components/schemas/ModelPropertyAssociation"
+          },
+          "type": {
+            "type": "string"
+          },
+          "optional": {
+            "type": "boolean"
+          },
+          "defaultValue": {
+            "type": "object"
+          },
+          "description": {
+            "type": "string"
+          },
+          "elementType": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "transformedOptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "visible": {
+            "$ref": "#/components/schemas/ModelPropertyVisibility"
+          }
+        },
+        "required": [
+          "name",
+          "label",
+          "association",
+          "type",
+          "optional",
+          "defaultValue",
+          "description",
+          "elementType",
+          "options",
+          "transformedOptions",
+          "visible"
+        ]
+      },
+      "Model": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the model",
+            "example": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The unique technical name of the model",
+            "example": "gpt-4o",
+            "uniqueItems": true
+          },
+          "variations": {
+            "description": "A list of specific variation strings associated with this model family",
+            "example": [
+              "gpt-4o-2024-05-13",
+              "gpt-4o-mini"
+            ],
+            "items": {
+              "type": "array"
+            },
+            "type": "array"
+          },
+          "integrationType": {
+            "description": "The integration provider type",
+            "example": "OPEN_AI_LLM",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntegrationType"
+              }
+            ]
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Flag indicating if the model is currently enabled for use",
+            "default": true,
+            "example": true
+          },
+          "type": {
+            "description": "The category/capability type of the model",
+            "default": "generative",
+            "example": "generative",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelType"
+              }
+            ]
+          },
+          "modelCardUrl": {
+            "type": "string",
+            "description": "External URL pointing to the model card or documentation",
+            "example": "https://openai.com/index/hello-gpt-4o/",
+            "format": "url",
+            "nullable": true
+          },
+          "properties": {
+            "description": "Configuration properties/parameters specific to this model",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelProperty"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "integrationType",
+          "type",
+          "properties"
+        ]
+      }
+    }
+  }
+}
