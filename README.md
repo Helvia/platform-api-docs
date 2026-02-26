@@ -1,36 +1,22 @@
 # Helvia.ai Platform API Documentation
 
-This repository hosts the consolidated OpenAPI specifications for all Helvia.ai Platform API services. Specs are published via GitHub Pages and consumed by GitBook.
+Welcome to the Helvia.ai AI Agents Platform API documentation.
 
-## Hosted Specs
+The platform enables AI Builders to create Conversational AI Agent solutions with LLMs and manage their full lifecycle: design, deployment, monitoring, improvement, and debugging.
 
-| Service | Spec URL |
-|---------|----------|
-| hbf-core | `https://helvia.github.io/platform-api-docs/specs/hbf-core.openapi.json` |
-| hbf-nlp | `https://helvia.github.io/platform-api-docs/specs/hbf-nlp.openapi.json` |
-| hbf-session-manager | `https://helvia.github.io/platform-api-docs/specs/hbf-session-manager.openapi.json` |
-| helvia-rag-pipelines | `https://helvia.github.io/platform-api-docs/specs/helvia-rag-pipelines.openapi.json` |
-| semantic-doc-segmenter | `https://helvia.github.io/platform-api-docs/specs/semantic-doc-segmenter.openapi.json` |
+## Quick Links
 
-## How to Update
+- **[API Reference](api-reference/overview.md)** — Interactive API documentation for all platform services
+- **[Authentication](api-reference/authentication.md)** — How to obtain and use API tokens
+
+## Updating Specs
 
 1. In the main platform repo, run `make docs-api` to re-export all OpenAPI specs
-2. Copy the generated files from `docs/api/` into this repo's `specs/` directory
-3. Commit and push — GitHub Pages will update automatically
-4. GitBook picks up changes on next page load (specs are referenced by URL)
+2. Specs are automatically copied to `specs/` if this repo is cloned alongside the platform
+3. Commit and push — GitHub Pages and GitBook update automatically
+
+Or use the `/publish-api-docs` Claude Code skill which handles the full workflow.
 
 ## Local Browsing
 
-Open `index.html` in a browser to see links to all API specs rendered with Swagger UI.
-
-## Structure
-
-```
-specs/
-├── hbf-core.openapi.json
-├── hbf-nlp.openapi.json
-├── hbf-session-manager.openapi.json
-├── helvia-rag-pipelines.openapi.json
-└── semantic-doc-segmenter.openapi.json
-index.html              ← Quick-browse page with Swagger UI
-```
+Open `index.html` in a browser to browse all API specs with Swagger UI.
