@@ -4,14 +4,16 @@ The Helvia.ai Platform exposes REST APIs through multiple services. Each service
 
 ## Services
 
-| Service | Description | Base URL (local) |
-|---------|-------------|------------------|
-| **hbf-core** | Core backend API — manages organizations, agents (tenants), users, and all platform configuration | `http://localhost:8080` |
-| **hbf-nlp** | NLP processing service — handles LLM calls, intent classification, and NLP pipeline execution | `http://localhost:2055` |
-| **hbf-session-manager** | Session lifecycle management — tracks conversation sessions and triggers post-completion actions | `http://localhost:3002` |
-| **helvia-rag-pipelines** | RAG and semantic search — manages document collections, embeddings, and vector-based retrieval | `http://localhost:8081` |
-| **semantic-doc-segmenter** | Document processing — ingests documents (PDF, DOCX, etc.), segments them into chunks, and tags them | `http://localhost:8082` |
-| **hbf-bot** | Chatbot executor — runs agent configurations in chat channels (minimal API, no OpenAPI spec) | `http://localhost:3001` |
+| Service | Description | Production URL | Local URL |
+|---------|-------------|----------------|-----------|
+| **hbf-core** | Core backend API — manages organizations, agents (tenants), users, and all platform configuration | `https://api.helvia.ai` | `http://localhost:8080` |
+| **hbf-nlp** | NLP processing service — handles LLM calls, intent classification, and NLP pipeline execution | `https://nlp.helvia.ai` | `http://localhost:2055` |
+| **hbf-session-manager** | Session lifecycle management — tracks conversation sessions and triggers post-completion actions | `https://sessions.helvia.ai` | `http://localhost:3002` |
+| **helvia-rag-pipelines** | RAG and semantic search — manages document collections, embeddings, and vector-based retrieval | `https://rag.helvia.ai` | `http://localhost:8081` |
+| **semantic-doc-segmenter** | Document processing — ingests documents (PDF, DOCX, etc.), segments them into chunks, and tags them | `https://segmenter.helvia.ai` | `http://localhost:8082` |
+| **hbf-bot** | Chatbot executor — runs agent configurations in chat channels (minimal API, no OpenAPI spec) | `https://bot.helvia.ai` | `http://localhost:3001` |
+
+> **Note:** Production URLs above are placeholders. Replace with your actual deployment URLs.
 
 ## Common Patterns
 

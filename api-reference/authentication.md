@@ -15,10 +15,18 @@ Used by the hbf-console frontend and any external client calling hbf-core APIs o
 **How to obtain:**
 
 ```bash
+# Production
+curl -X POST https://api.helvia.ai/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "you@example.com", "password": "your-password"}'
+
+# Local development
 curl -X POST http://localhost:8080/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email": "admin@helvia.dev", "password": "ChangeMe123!"}'
 ```
+
+> **Note:** The production URL above is a placeholder. Replace with your actual deployment URL.
 
 The response includes an `accessToken` field — use that as the Bearer token.
 

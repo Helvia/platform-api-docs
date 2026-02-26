@@ -2,7 +2,8 @@
 
 The chatbot executor service. Runs agent (tenant) configurations in chat channels including web-chat, Viber, Messenger, Slack, and Teams.
 
-**Base URL (local):** `http://localhost:3001`
+**Production URL:** `https://bot.helvia.ai` (placeholder — replace with actual URL)
+**Local URL:** `http://localhost:3001`
 
 hbf-bot has a minimal API surface and does not provide an OpenAPI specification. Its endpoints are documented below.
 
