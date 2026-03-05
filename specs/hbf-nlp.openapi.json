@@ -1090,13 +1090,13 @@
       "name": "Messages Metadata"
     },
     {
+      "name": "models"
+    },
+    {
       "name": "NLP"
     },
     {
       "name": "TestSet"
-    },
-    {
-      "name": "models"
     }
   ],
   "servers": [],

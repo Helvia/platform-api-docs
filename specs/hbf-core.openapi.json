@@ -18,13 +18,13 @@
   ],
   "tags": [
     {
-      "name": "API Info Resource"
-    },
-    {
       "name": "Activity Resource"
     },
     {
       "name": "Analytics Resource"
+    },
+    {
+      "name": "API Info Resource"
     },
     {
       "name": "Api Tokens Moderator Resource"
@@ -58,10 +58,10 @@
       "description": "Moderator Interface"
     },
     {
-      "name": "CSAT Sections Resource"
+      "name": "Chat Session Resource"
     },
     {
-      "name": "Chat Session Resource"
+      "name": "CSAT Sections Resource"
     },
     {
       "name": "Deployment Public Data Resource",
@@ -140,6 +140,9 @@
       "name": "Survey Resource"
     },
     {
+      "name": "Tenant monitor Resource"
+    },
+    {
       "name": "Tenant Public Data Resource",
       "description": "Contains endpoints for retrieving public Tenant data"
     },
@@ -148,9 +151,6 @@
     },
     {
       "name": "Tenant Resource"
-    },
-    {
-      "name": "Tenant monitor Resource"
     },
     {
       "name": "Test Set Resource"
@@ -165,15 +165,6 @@
       "name": "Translation Resource"
     },
     {
-      "name": "User Group Resource"
-    },
-    {
-      "name": "User Group Resource (Organization)"
-    },
-    {
-      "name": "User Resource"
-    },
-    {
       "name": "User account recovery Resource",
       "description": "Contains endpoints to allow user to reset password"
     },
@@ -182,11 +173,20 @@
       "description": "Contains endpoints for user email verification"
     },
     {
+      "name": "User Group Resource"
+    },
+    {
+      "name": "User Group Resource (Organization)"
+    },
+    {
       "name": "User invitation Resource"
     },
     {
       "name": "User registration Public Resource",
       "description": "Contains endpoints for user registration"
+    },
+    {
+      "name": "User Resource"
     }
   ],
   "paths": {
@@ -22175,6 +22175,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -22228,9 +22231,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
@@ -22467,6 +22467,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -22520,9 +22523,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
@@ -22759,6 +22759,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -22812,9 +22815,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
@@ -23051,6 +23051,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -23104,9 +23107,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
@@ -23343,6 +23343,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -23396,9 +23399,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
@@ -23635,6 +23635,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -23688,9 +23691,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
@@ -23927,6 +23927,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -23980,9 +23983,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
@@ -24219,6 +24219,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -24272,9 +24275,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
