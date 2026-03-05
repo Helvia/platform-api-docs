@@ -178,7 +178,7 @@
   },
   "info": {
     "title": "Helvia.ai Data Manager",
-    "description": "Data management service for the Helvia.ai Platform",
+    "description": "Data management and export service for the Helvia.ai Platform. Provides bulk data operations, exports, and data processing capabilities for platform analytics and reporting workflows.",
     "version": "1.0",
     "contact": {}
   },

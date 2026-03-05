@@ -1058,7 +1058,7 @@
   },
   "info": {
     "title": "Helvia.ai NLP Service",
-    "description": "NLP processing service for the Helvia.ai Platform",
+    "description": "NLP and LLM processing service for the Helvia.ai Platform. Handles intent classification, text generation, language detection, and NLP pipeline execution using providers such as Azure OpenAI, OpenAI, and Google Gemini. Called by hbf-bot during chat message processing and by hbf-core during pipeline training.",
     "version": "1.2.2",
     "contact": {}
   },

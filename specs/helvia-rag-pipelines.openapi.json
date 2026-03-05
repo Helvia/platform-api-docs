@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Helvia.ai RAG Pipelines",
-    "description": "Retrieval-augmented generation and semantic search service for the Helvia.ai Platform",
+    "description": "Retrieval-augmented generation (RAG) and semantic search service for the Helvia.ai Platform. Manages document corpora, generates embeddings, indexes them in a vector database (Qdrant), and performs semantic search at query time. Used by AI agents to retrieve relevant knowledge base content and generate grounded LLM responses.",
     "contact": {
       "name": "Helvia.ai",
       "url": "https://helvia.ai",

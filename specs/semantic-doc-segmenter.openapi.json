@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Helvia.ai Document Segmenter",
-    "description": "Document ingestion, segmentation, and tagging service for the Helvia.ai Platform",
+    "description": "Document ingestion, segmentation, and tagging service for the Helvia.ai Platform. Accepts documents in various formats (PDF, DOCX, PPTX, HTML, Markdown, TXT), converts them to Markdown, splits them into semantically meaningful chunks, and optionally tags them using LLMs. Feeds processed content into the platform's knowledge base and RAG pipelines.",
     "contact": {
       "name": "Helvia.ai",
       "url": "https://helvia.ai/",

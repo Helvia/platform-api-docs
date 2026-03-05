@@ -230,7 +230,7 @@
   },
   "info": {
     "title": "Helvia.ai Media Manager",
-    "description": "Media file management service for the Helvia.ai Platform",
+    "description": "Media file management service for the Helvia.ai Platform. Handles upload, storage, and retrieval of media files (images, documents, audio) used in agent conversations and knowledge base content.",
     "version": "1.0",
     "contact": {}
   },

@@ -1891,7 +1891,7 @@
   },
   "info": {
     "title": "Helvia.ai Livechat Manager",
-    "description": "Livechat management service for the Helvia.ai Platform",
+    "description": "Livechat management service for the Helvia.ai Platform. Handles real-time routing of conversations between end-users and human agents when an AI agent escalates via a handover node. Supports multiple livechat providers including Zendesk, Cisco, Genesys, and Helvia's built-in livechat.",
     "version": "hbf-lcm",
     "contact": {}
   },

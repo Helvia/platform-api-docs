@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Helvia.ai Core API",
-    "description": "Core backend API for the Helvia.ai Platform",
+    "description": "Central backend API for the Helvia.ai Platform. Manages organizations (workspaces), AI agents (tenants), users, conversation sessions, flow definitions, knowledge bases, NLP pipelines, and third-party integrations. All other platform services read from and write to hbf-core \u2014 it is the single source of truth for all platform configuration and data.",
     "version": "2.0.0"
   },
   "servers": [
@@ -22172,9 +22172,6 @@
                               }
                             }
                           },
-                          "overlap": {
-                            "type": "boolean"
-                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -22228,6 +22225,9 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
+                          },
+                          "overlap": {
+                            "type": "boolean"
                           }
                         }
                       }
@@ -22464,9 +22464,6 @@
                               }
                             }
                           },
-                          "overlap": {
-                            "type": "boolean"
-                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -22520,6 +22517,9 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
+                          },
+                          "overlap": {
+                            "type": "boolean"
                           }
                         }
                       }
@@ -22756,9 +22756,6 @@
                               }
                             }
                           },
-                          "overlap": {
-                            "type": "boolean"
-                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -22812,6 +22809,9 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
+                          },
+                          "overlap": {
+                            "type": "boolean"
                           }
                         }
                       }
@@ -23048,9 +23048,6 @@
                               }
                             }
                           },
-                          "overlap": {
-                            "type": "boolean"
-                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -23104,6 +23101,9 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
+                          },
+                          "overlap": {
+                            "type": "boolean"
                           }
                         }
                       }
@@ -23340,9 +23340,6 @@
                               }
                             }
                           },
-                          "overlap": {
-                            "type": "boolean"
-                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -23396,6 +23393,9 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
+                          },
+                          "overlap": {
+                            "type": "boolean"
                           }
                         }
                       }
@@ -23632,9 +23632,6 @@
                               }
                             }
                           },
-                          "overlap": {
-                            "type": "boolean"
-                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -23688,6 +23685,9 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
+                          },
+                          "overlap": {
+                            "type": "boolean"
                           }
                         }
                       }
@@ -23924,9 +23924,6 @@
                               }
                             }
                           },
-                          "overlap": {
-                            "type": "boolean"
-                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -23980,6 +23977,9 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
+                          },
+                          "overlap": {
+                            "type": "boolean"
                           }
                         }
                       }
@@ -24216,9 +24216,6 @@
                               }
                             }
                           },
-                          "overlap": {
-                            "type": "boolean"
-                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -24272,6 +24269,9 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
+                          },
+                          "overlap": {
+                            "type": "boolean"
                           }
                         }
                       }
@@ -25520,22 +25520,22 @@
               }
             }
           },
-          "404": {
-            "description": "The FbHandover document is missing.",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
           "200": {
             "description": "Successful Operation",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FbHandoverDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The FbHandover document is missing.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
                 }
               }
             }

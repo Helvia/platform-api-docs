@@ -376,7 +376,7 @@
   },
   "info": {
     "title": "Helvia.ai Reports Service",
-    "description": "Reporting and analytics service for the Helvia.ai Platform",
+    "description": "Reporting and analytics service for the Helvia.ai Platform. Generates aggregated reports on conversation metrics, agent performance, user engagement, and other platform analytics. Provides data for the dashboard and observatory features in the console.",
     "version": "1.0",
     "contact": {}
   },

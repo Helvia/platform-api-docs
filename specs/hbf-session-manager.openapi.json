@@ -274,7 +274,7 @@
   },
   "info": {
     "title": "Helvia.ai Session Manager",
-    "description": "Session lifecycle management service for the Helvia.ai Platform",
+    "description": "Session lifecycle management service for the Helvia.ai Platform. Monitors conversation sessions for inactivity, marks them as complete, and triggers post-completion actions such as LLM summarization, webhook delivery, and survey dispatch. Also monitors NLP pipelines and triggers auto-retraining when needed.",
     "version": "1.0",
     "contact": {}
   },
