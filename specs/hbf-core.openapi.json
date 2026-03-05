@@ -24,9 +24,6 @@
       "name": "Analytics Resource"
     },
     {
-      "name": "API Info Resource"
-    },
-    {
       "name": "Api Tokens Moderator Resource"
     },
     {
@@ -25898,43 +25895,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PagedKnowledgeBaseArticleResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/": {
-      "get": {
-        "tags": [
-          "API Info Resource"
-        ],
-        "summary": "Get a Welcome Message",
-        "description": "Returns a welcome message.",
-        "operationId": "get_35",
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Successful Operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Quote"
                 }
               }
             }

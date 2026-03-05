@@ -1,34 +1,6 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/": {
-      "get": {
-        "operationId": "HealthController_getHealth[0]",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Health"
-        ]
-      }
-    },
-    "/health": {
-      "get": {
-        "operationId": "HealthController_getHealth[1]",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Health"
-        ]
-      }
-    },
     "/orgs/{orgId}/interactions": {
       "get": {
         "operationId": "InteractionsController_list",
@@ -211,9 +183,6 @@
     "contact": {}
   },
   "tags": [
-    {
-      "name": "Health"
-    },
     {
       "name": "interactions"
     }

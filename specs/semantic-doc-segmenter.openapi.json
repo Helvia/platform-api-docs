@@ -442,111 +442,6 @@
         }
       }
     },
-    "/debug/jobs/{job_id}": {
-      "get": {
-        "tags": [
-          "Debug resources"
-        ],
-        "summary": "Get Job Debug Info",
-        "description": "Get detailed debug information for a specific job",
-        "operationId": "get_job_debug_info_debug_jobs__job_id__get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "job_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Job Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/debug/health": {
-      "get": {
-        "tags": [
-          "Debug resources"
-        ],
-        "summary": "Get Health Info",
-        "description": "Get service health and pending job information",
-        "operationId": "get_health_info_debug_health_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ]
-      }
-    },
-    "/debug/health_with_details": {
-      "get": {
-        "tags": [
-          "Debug resources"
-        ],
-        "summary": "Get Health Detailed Info",
-        "description": "Get detailed service health with job IDs and timestamps",
-        "operationId": "get_health_detailed_info_debug_health_with_details_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ]
-      }
-    },
     "/": {
       "get": {
         "summary": "Root",
@@ -1120,9 +1015,6 @@
     }
   },
   "tags": [
-    {
-      "name": "Debug resources"
-    },
     {
       "name": "Documents resources"
     },
