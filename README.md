@@ -6,19 +6,22 @@ This repository hosts the **curated** OpenAPI specifications for all Helvia.ai P
 
 ## Hosted Specs (GitHub Pages)
 
-| Service | Spec URL | Source |
-|---------|----------|--------|
-| hbf-core | [hbf-core.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-core.openapi.json) | Live (production) |
-| hbf-nlp | [hbf-nlp.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-nlp.openapi.json) | Local export |
-| hbf-session-manager | [hbf-session-manager.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-session-manager.openapi.json) | Local export |
-| helvia-rag-pipelines | [helvia-rag-pipelines.openapi.json](https://helvia.github.io/platform-api-docs/specs/helvia-rag-pipelines.openapi.json) | Local export |
-| semantic-doc-segmenter | [semantic-doc-segmenter.openapi.json](https://helvia.github.io/platform-api-docs/specs/semantic-doc-segmenter.openapi.json) | Local export |
+| Service | Spec URL (for GitBook) |
+|---------|------------------------|
+| hbf-core | [hbf-core.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-core.openapi.json) |
+| hbf-nlp | [hbf-nlp.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-nlp.openapi.json) |
+| hbf-session-manager | [hbf-session-manager.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-session-manager.openapi.json) |
+| hbf-media-manager | [hbf-media-manager.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-media-manager.openapi.json) |
+| hbf-reports | [hbf-reports.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-reports.openapi.json) |
+| hbf-data-manager | [hbf-data-manager.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-data-manager.openapi.json) |
+| helvia-rag-pipelines | [helvia-rag-pipelines.openapi.json](https://helvia.github.io/platform-api-docs/specs/helvia-rag-pipelines.openapi.json) |
+| semantic-doc-segmenter | [semantic-doc-segmenter.openapi.json](https://helvia.github.io/platform-api-docs/specs/semantic-doc-segmenter.openapi.json) |
 
 ## How Specs Are Generated
 
-Specs are fetched, curated, and published using `scripts/fetch-and-curate-specs.py` in the main platform repo:
+Specs are fetched from live production endpoints, curated, and published using `scripts/fetch-and-curate-specs.py` in the main platform repo:
 
-1. **Fetch**: For services with a live production URL (e.g. hbf-core), the spec is fetched directly from the running service. For others, a local export fallback is used.
+1. **Fetch**: Each service's OpenAPI spec is fetched directly from its production swagger endpoint.
 2. **Curate**: Rules in `docs/api-docs-config.yaml` control which tags/paths are included, tag ordering, and info field overrides.
 3. **Publish**: Curated specs are written to `specs/` in this repo. Push to `main` and GitHub Pages updates automatically.
 
