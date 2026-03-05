@@ -22172,6 +22172,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -22225,9 +22228,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
@@ -22464,6 +22464,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -22517,9 +22520,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
@@ -22756,6 +22756,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -22809,9 +22812,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
@@ -23048,6 +23048,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -23101,9 +23104,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
@@ -23340,6 +23340,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -23393,9 +23396,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
@@ -23632,6 +23632,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -23685,9 +23688,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
@@ -23924,6 +23924,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -23977,9 +23980,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }
@@ -24216,6 +24216,9 @@
                               }
                             }
                           },
+                          "overlap": {
+                            "type": "boolean"
+                          },
                           "duration": {
                             "type": "object",
                             "properties": {
@@ -24269,9 +24272,6 @@
                           "instant": {
                             "type": "string",
                             "format": "date-time"
-                          },
-                          "overlap": {
-                            "type": "boolean"
                           }
                         }
                       }

@@ -1,0 +1,2765 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/integrations/callbacks/{implementation}/events": {
+      "post": {
+        "operationId": "CallbackHandlerController_handleEvent",
+        "parameters": [
+          {
+            "name": "implementation",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Used by Microsoft as a callback URL to send events",
+        "tags": [
+          "Event callbacks",
+          "Integrations"
+        ]
+      }
+    },
+    "/users/{userId}/livechat-requests": {
+      "get": {
+        "operationId": "LivechatCoreController_getUserRequestsModerator",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "order",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "take",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "lcm-token": []
+          }
+        ],
+        "summary": "Usage: HBF-BOT <b>ONLY</b><br>\nRequires hbf-lcm token<br>\nGets all the requests of a specific end-user and status",
+        "tags": [
+          "Livechat Core"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/livechat-requests": {
+      "get": {
+        "operationId": "LivechatCoreController_getOrganizationRequestsModerator",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "order",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "take",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "lcm-token": []
+          }
+        ],
+        "summary": "Usage: HBF-BOT <b>ONLY</b><br>\nRequires hbf-lcm token<br>\nGets all the requests of a specific organization and status",
+        "tags": [
+          "Livechat Core"
+        ]
+      }
+    },
+    "/agent/organizations/{organizationId}/livechat-requests": {
+      "get": {
+        "operationId": "LivechatCoreController_getRequests",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT<br>\nGets all the current authenticated agent's requests of a specific organization and status. The current user is\ndetermined by the hbf-core token",
+        "tags": [
+          "Livechat Core"
+        ]
+      }
+    },
+    "/livechat-requests": {
+      "post": {
+        "operationId": "LivechatCoreController_postRequest",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LivechatRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "lcm-token": []
+          }
+        ],
+        "summary": "Usage: HBF-BOT <b>ONLY</b><br>\nRequires hbf-lcm token<br>\nCreates a new request",
+        "tags": [
+          "Livechat Core"
+        ]
+      }
+    },
+    "/users/{userId}/livechat-conversations": {
+      "get": {
+        "operationId": "LivechatCoreController_getUserConversationsModerator",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "skip",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "take",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "lcm-token": []
+          }
+        ],
+        "summary": "Usage: HBF-BOT <b>ONLY</b><br>\nRequires hbf-lcm token<br>\nGets the conversations of an end-user based on their chatbricks id and status",
+        "tags": [
+          "Livechat Core"
+        ]
+      }
+    },
+    "/agent/organizations/{organizationId}/livechat-conversations": {
+      "head": {
+        "operationId": "LivechatCoreController_countConversations",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT<br>\nCounts the conversations of an agent based on several criteria.",
+        "tags": [
+          "Livechat Core"
+        ]
+      },
+      "get": {
+        "operationId": "LivechatCoreController_getConversations",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "accept",
+            "required": true,
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT<br>\nGets the conversations of an agent based on several criteria. The client can decide the accept header type. If\nit is set to application/zip, conversations are fetched inside a zip as separate csv files that includes all\ntheir messages",
+        "tags": [
+          "Livechat Core"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/livechat-conversations/{id}": {
+      "get": {
+        "operationId": "LivechatCoreController_getConversation",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LivechatConversation"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT<br>\nGets a single conversation",
+        "tags": [
+          "Livechat Core"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/livechat-messages": {
+      "get": {
+        "operationId": "LivechatCoreController_getMessages",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "take",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "accept",
+            "required": true,
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT<br>\nGets the messages of a conversation",
+        "tags": [
+          "Livechat Core"
+        ]
+      },
+      "post": {
+        "operationId": "LivechatCoreController_postMessage",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageCallback"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LivechatMessage"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "lcm-token": []
+          }
+        ],
+        "summary": "Usage: HBF-BOT <b>ONLY</b><br>\nRequires hbf-lcm token<br>\nCreates a new messages",
+        "tags": [
+          "Livechat Core"
+        ]
+      }
+    },
+    "/livechat-attachments": {
+      "post": {
+        "operationId": "LivechatCoreController_postAttachment",
+        "parameters": [
+          {
+            "name": "conversation",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT<br>\nCreates a new attachment",
+        "tags": [
+          "Livechat Core"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/livechat-settings": {
+      "get": {
+        "operationId": "LivechatCoreController_getLivechatSettings",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LivechatSettings"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVECHAT_ADMIN<br>\nGets the settings of a specific organization",
+        "tags": [
+          "Livechat Core"
+        ]
+      },
+      "put": {
+        "operationId": "LivechatCoreController_putLivechatSettings",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LivechatSettings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LivechatSettings"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVECHAT_ADMIN<br>\nSets the settings of a specific organization",
+        "tags": [
+          "Livechat Core"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/data-retention": {
+      "delete": {
+        "operationId": "LivechatCoreController_dataRetention",
+        "parameters": [
+          {
+            "name": "before",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "lcm-token": []
+          }
+        ],
+        "summary": "Usage: Other systems like hbf-core or any data retention service<br>\nRequires hbf-lcm token<br>\nPurges all entities of an organization or tenant before the given date. This includes: Conversations,\nParticipants, Messages, Notes and Attachments.",
+        "tags": [
+          "Livechat Core"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/data": {
+      "delete": {
+        "operationId": "LivechatCoreController_purge",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "lcm-token": []
+          }
+        ],
+        "summary": "Usage: Other systems like hbf-core or any data retention service<br>\nRequires hbf-lcm token<br>\nPurges all entities of an organization or tenant. This includes: Conversations, Participants, Messages, Notes and\nAttachments.",
+        "tags": [
+          "Livechat Core"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/user-groups/{userGroupId}/business-hours": {
+      "get": {
+        "operationId": "BusinessHoursController_getAll",
+        "parameters": [
+          {
+            "name": "userGroupId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BusinessHours"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVECHAT_ADMIN | HBF_ORG_ADMIN<br>\nGets all the BusinessHours entities for the specified user group",
+        "tags": [
+          "Business Hours"
+        ]
+      },
+      "post": {
+        "operationId": "BusinessHoursController_create",
+        "parameters": [
+          {
+            "name": "userGroupId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessHours"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessHours"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVECHAT_ADMIN | HBF_ORG_ADMIN<br>\nCreates a new BusinessHours entity",
+        "tags": [
+          "Business Hours"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/user-groups/{userGroupId}/business-hours/{id}": {
+      "patch": {
+        "operationId": "BusinessHoursController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "userGroupId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessHours"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessHours"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVECHAT_ADMIN | HBF_ORG_ADMIN<br>\nUpdates an existing BusinessHours entity",
+        "tags": [
+          "Business Hours"
+        ]
+      },
+      "delete": {
+        "operationId": "BusinessHoursController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "userGroupId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVECHAT_ADMIN | HBF_ORG_ADMIN<br>\nDeletes an existing BusinessHours entity",
+        "tags": [
+          "Business Hours"
+        ]
+      }
+    },
+    "/livechat-conversations/{conversationId}/livechat-notes": {
+      "get": {
+        "operationId": "NotesController_getAll",
+        "parameters": [
+          {
+            "name": "conversationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LivechatNote"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT<br>\nGets all the notes of a specific conversation",
+        "tags": [
+          "Notes"
+        ]
+      },
+      "post": {
+        "operationId": "NotesController_create",
+        "parameters": [
+          {
+            "name": "conversationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LivechatNote"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LivechatNote"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT<br>\nCreates a new LivechatNote",
+        "tags": [
+          "Notes"
+        ]
+      }
+    },
+    "/livechat-conversations/{conversationId}/livechat-notes/{id}": {
+      "patch": {
+        "operationId": "NotesController_update",
+        "parameters": [
+          {
+            "name": "conversationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LivechatNote"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LivechatNote"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT<br>\nUpdates an existing LivechatNote",
+        "tags": [
+          "Notes"
+        ]
+      },
+      "delete": {
+        "operationId": "NotesController_delete",
+        "parameters": [
+          {
+            "name": "conversationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT<br>\nDeletes an existing LivechatNote",
+        "tags": [
+          "Notes"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/predefined-responses": {
+      "post": {
+        "operationId": "PredefinedResponseController_createPredefinedResponse",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PredefinedResponse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredefinedResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT & Any chatbricks organization role<br>\nCreates a PredefinedResponse",
+        "tags": [
+          "Predefined Entities"
+        ]
+      },
+      "get": {
+        "operationId": "PredefinedResponseController_getAll",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantScope",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT & Any chatbricks organization role<br>\nGets all the PredefinedEntities of the current organization and tenant scopes.",
+        "tags": [
+          "Predefined Entities"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/predefined-responses/{id}": {
+      "patch": {
+        "operationId": "PredefinedResponseController_updatePredefinedResponse",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PredefinedResponse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT & Any chatbricks organization role<br>\nUpdates an existing PredefinedResponse",
+        "tags": [
+          "Predefined Entities"
+        ]
+      },
+      "get": {
+        "operationId": "PredefinedResponseController_get",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT & Any chatbricks organization role<br>\nGets a single PredefinedEntity based on the id",
+        "tags": [
+          "Predefined Entities"
+        ]
+      },
+      "delete": {
+        "operationId": "PredefinedResponseController_delete",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT & Any chatbricks organization role<br>\nDeletes a PredefinedEntity",
+        "tags": [
+          "Predefined Entities"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/predefined-actions": {
+      "post": {
+        "operationId": "PredefinedActionController_createPredefinedAction",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PredefinedAction"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredefinedAction"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT & Any chatbricks organization role<br>\nCreates a PredefinedAction",
+        "tags": [
+          "Predefined Entities"
+        ]
+      },
+      "get": {
+        "operationId": "PredefinedActionController_getAll",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantScope",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT & Any chatbricks organization role<br>\nGets all the PredefinedEntities of the current organization and tenant scopes.",
+        "tags": [
+          "Predefined Entities"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/predefined-actions/{id}": {
+      "patch": {
+        "operationId": "PredefinedActionController_updatePredefinedAction",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PredefinedAction"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT & Any chatbricks organization role<br>\nUpdates an existing PredefinedAction",
+        "tags": [
+          "Predefined Entities"
+        ]
+      },
+      "get": {
+        "operationId": "PredefinedActionController_get",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT & Any chatbricks organization role<br>\nGets a single PredefinedEntity based on the id",
+        "tags": [
+          "Predefined Entities"
+        ]
+      },
+      "delete": {
+        "operationId": "PredefinedActionController_delete",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Usage: All agent clients (ex. hbf-console)<br>\nRequires hbf-core token<br>\nRoles: HBF_ORG_LIVE_AGENT & Any chatbricks organization role<br>\nDeletes a PredefinedEntity",
+        "tags": [
+          "Predefined Entities"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/tenants/{tenantId}/chat-sessions/{chatSessionId}/messages": {
+      "get": {
+        "operationId": "RelayController_getChatSessionMessagesById",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chatSessionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Requires hbf-core token<br>\nGets a contact by contact id for the current implementation",
+        "tags": [
+          "Relay"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/tags": {
+      "get": {
+        "operationId": "RelayController_getTags",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Requires hbf-core token<br>\nGets all organization tags",
+        "tags": [
+          "Relay"
+        ]
+      },
+      "post": {
+        "operationId": "RelayController_createOrGetTag",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tag"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Requires hbf-core token<br>\nCreates or gets a tag in hbf-core",
+        "tags": [
+          "Relay"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/tenants/{tenantId}/chat-sessions/{chatSessionId}/tags": {
+      "get": {
+        "operationId": "RelayController_getChatSessionTags",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chatSessionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Requires hbf-core token<br>\nGet the tags of a chat session",
+        "tags": [
+          "Relay"
+        ]
+      },
+      "patch": {
+        "operationId": "RelayController_updateChatSessionTags",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chatSessionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Requires hbf-core token<br>\nUpdates the tags of a chat session",
+        "tags": [
+          "Relay"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/tenants/{tenantId}/contacts/{contactId}": {
+      "get": {
+        "operationId": "RelayController_getContactById",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contactId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Requires hbf-core token<br>\nGets a contact by contact id for the current implementation",
+        "tags": [
+          "Relay"
+        ]
+      }
+    },
+    "/organizations/{organizationId}/tenants/{tenantId}/contact-by-subscriber-handle/{handle}": {
+      "get": {
+        "operationId": "RelayController_getContactBySubscriberHandle",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "handle",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "hbf-token": []
+          }
+        ],
+        "summary": "Requires hbf-core token<br>\nGets a contact by contact id for the current implementation",
+        "tags": [
+          "Relay"
+        ]
+      }
+    },
+    "/twilio/video": {
+      "post": {
+        "description": "Used by Twilio as a callback URL to send updates related to a room and/or its participants.",
+        "externalDocs": {
+          "description": "Rooms Status Callback",
+          "url": "https://www.twilio.com/docs/video/api/status-callbacks#rooms-callbacks"
+        },
+        "operationId": "TwilioController_twilioVideo",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TwilioWebhookVideoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Used by Twilio as a callback URL to send updates related to a room and/or its participants.",
+        "tags": [
+          "Event callbacks"
+        ]
+      }
+    },
+    "/twilio/recording-rules": {
+      "post": {
+        "description": "Used by Twilio to set recording rules related to a room.",
+        "externalDocs": {
+          "description": "Recording Rules",
+          "url": "https://www.twilio.com/docs/video/api/recording-rules"
+        },
+        "operationId": "TwilioController_twilioRecordingRules",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecordingRulesInstance"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Used by Twilio as a callback URL to send updates related to a room and/or its participants.",
+        "tags": [
+          "Event callbacks"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Helvia.ai Livechat Manager",
+    "description": "Livechat management service for the Helvia.ai Platform",
+    "version": "hbf-lcm",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Business Hours"
+    },
+    {
+      "name": "Event callbacks"
+    },
+    {
+      "name": "Integrations"
+    },
+    {
+      "name": "Livechat Core"
+    },
+    {
+      "name": "Notes"
+    },
+    {
+      "name": "Predefined Entities"
+    },
+    {
+      "name": "Relay"
+    }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "hbf-token": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      },
+      "lcm-token": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "LivechatAttachment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "platformUserId": {
+            "type": "string"
+          },
+          "mimetype": {
+            "type": "string"
+          },
+          "livechatMessage": {
+            "$ref": "#/components/schemas/LivechatMessage"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "path",
+          "platformUserId",
+          "mimetype",
+          "livechatMessage",
+          "createdAt"
+        ]
+      },
+      "MessageOptions": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "break": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LivechatMessage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "type": {
+            "enum": [
+              "text",
+              "system_message"
+            ],
+            "type": "string"
+          },
+          "livechatConversation": {
+            "$ref": "#/components/schemas/LivechatConversation"
+          },
+          "sentDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "_originalText": {
+            "type": "string"
+          },
+          "_text": {
+            "type": "string"
+          },
+          "from": {
+            "$ref": "#/components/schemas/LivechatParticipant"
+          },
+          "platformSessionId": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "livechatAttachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LivechatAttachment"
+            }
+          },
+          "options": {
+            "$ref": "#/components/schemas/MessageOptions"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "livechatConversation",
+          "sentDate",
+          "_originalText",
+          "_text",
+          "from",
+          "platformSessionId",
+          "language",
+          "livechatAttachments"
+        ]
+      },
+      "Set": {
+        "type": "object",
+        "properties": {}
+      },
+      "LivechatParticipant": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "livechatConversation": {
+            "$ref": "#/components/schemas/LivechatConversation"
+          },
+          "participantType": {
+            "type": "string",
+            "enum": [
+              "end-user",
+              "agent"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive",
+              "transferred"
+            ]
+          },
+          "isOwner": {
+            "type": "boolean"
+          },
+          "platformUserId": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "lastUpdate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "maxAllowedTimeSlice": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastMessage": {
+            "$ref": "#/components/schemas/LivechatMessage"
+          },
+          "lastMessageRead": {
+            "type": "boolean"
+          },
+          "callToken": {
+            "type": "string"
+          },
+          "callStatus": {
+            "type": "string",
+            "enum": [
+              "new",
+              "joined",
+              "finished",
+              "cancelled",
+              "rejected",
+              "missed",
+              "failed"
+            ]
+          },
+          "flags": {
+            "$ref": "#/components/schemas/Set"
+          }
+        },
+        "required": [
+          "id",
+          "livechatConversation",
+          "participantType",
+          "status",
+          "isOwner",
+          "platformUserId",
+          "fullName",
+          "email",
+          "image",
+          "language",
+          "lastUpdate",
+          "maxAllowedTimeSlice",
+          "lastMessage",
+          "lastMessageRead",
+          "callToken",
+          "callStatus",
+          "flags"
+        ]
+      },
+      "TeamsNotification": {
+        "type": "object",
+        "properties": {
+          "channelId": {
+            "type": "string"
+          },
+          "azureTenantId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "channelId",
+          "azureTenantId"
+        ]
+      },
+      "LivechatSurveyQuestion": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "question",
+          "answer"
+        ]
+      },
+      "LivechatRequestMetadata": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "teamsNotification": {
+            "$ref": "#/components/schemas/TeamsNotification"
+          },
+          "preLiveChatSurvey": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LivechatSurveyQuestion"
+            }
+          },
+          "externalNotificationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "externalNotificationId"
+        ]
+      },
+      "LivechatRequest": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "external",
+              "transfer",
+              "invitation"
+            ]
+          },
+          "requestedDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "targetGroupId": {
+            "type": "string"
+          },
+          "targetUserId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "new",
+              "accepted",
+              "missed"
+            ]
+          },
+          "livechatConversation": {
+            "$ref": "#/components/schemas/LivechatConversation"
+          },
+          "acceptedBy": {
+            "type": "string"
+          },
+          "from": {
+            "$ref": "#/components/schemas/LivechatParticipant"
+          },
+          "leaveOnAccept": {
+            "type": "boolean"
+          },
+          "platformUserIncremental": {
+            "type": "number"
+          },
+          "supportsCall": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "number"
+          },
+          "platformSessionId": {
+            "type": "string"
+          },
+          "platformUserId": {
+            "type": "string"
+          },
+          "platformUserName": {
+            "type": "string"
+          },
+          "platformUserEmail": {
+            "type": "string",
+            "format": "email"
+          },
+          "platformUserPhone": {
+            "type": "string"
+          },
+          "platformUserCountry": {
+            "type": "string"
+          },
+          "platformUserLanguage": {
+            "type": "string"
+          },
+          "platformType": {
+            "enum": [
+              "MICROSOFT_TEAMS",
+              "MICROSOFT_WEB_CHAT",
+              "VIBER",
+              "FACEBOOK",
+              "EMAIL",
+              "LIVECHAT",
+              "SLACK",
+              "INSTAGRAM"
+            ],
+            "type": "string"
+          },
+          "platformOrigin": {
+            "type": "string"
+          },
+          "organizationId": {
+            "type": "string"
+          },
+          "tenantId": {
+            "type": "string"
+          },
+          "tenantName": {
+            "type": "string"
+          },
+          "tenantImageUrl": {
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/LivechatRequestMetadata"
+          },
+          "roomSid": {
+            "type": "string",
+            "nullable": true
+          },
+          "extras": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "type",
+          "requestedDate",
+          "status",
+          "livechatConversation",
+          "acceptedBy",
+          "platformUserIncremental",
+          "id",
+          "platformSessionId",
+          "platformUserId",
+          "platformUserName",
+          "platformType",
+          "platformOrigin",
+          "organizationId",
+          "tenantId",
+          "tenantName",
+          "tenantImageUrl"
+        ]
+      },
+      "LivechatConversation": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "endDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "started",
+              "finished"
+            ],
+            "type": "string"
+          },
+          "livechatParticipants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LivechatParticipant"
+            }
+          },
+          "livechatMessages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LivechatMessage"
+            }
+          },
+          "livechatRequests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LivechatRequest"
+            }
+          },
+          "lastMessage": {
+            "$ref": "#/components/schemas/LivechatMessage"
+          },
+          "idleReminderTries": {
+            "type": "number"
+          },
+          "id": {
+            "type": "number"
+          },
+          "platformSessionId": {
+            "type": "string"
+          },
+          "platformUserId": {
+            "type": "string"
+          },
+          "platformUserName": {
+            "type": "string"
+          },
+          "platformUserEmail": {
+            "type": "string",
+            "format": "email"
+          },
+          "platformUserPhone": {
+            "type": "string"
+          },
+          "platformUserCountry": {
+            "type": "string"
+          },
+          "platformUserLanguage": {
+            "type": "string"
+          },
+          "platformType": {
+            "enum": [
+              "MICROSOFT_TEAMS",
+              "MICROSOFT_WEB_CHAT",
+              "VIBER",
+              "FACEBOOK",
+              "EMAIL",
+              "LIVECHAT",
+              "SLACK",
+              "INSTAGRAM"
+            ],
+            "type": "string"
+          },
+          "platformOrigin": {
+            "type": "string"
+          },
+          "organizationId": {
+            "type": "string"
+          },
+          "tenantId": {
+            "type": "string"
+          },
+          "tenantName": {
+            "type": "string"
+          },
+          "tenantImageUrl": {
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/LivechatRequestMetadata"
+          },
+          "roomSid": {
+            "type": "string",
+            "nullable": true
+          },
+          "extras": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "startDate",
+          "endDate",
+          "status",
+          "livechatParticipants",
+          "livechatMessages",
+          "livechatRequests",
+          "lastMessage",
+          "idleReminderTries",
+          "id",
+          "platformSessionId",
+          "platformUserId",
+          "platformUserName",
+          "platformType",
+          "platformOrigin",
+          "organizationId",
+          "tenantId",
+          "tenantName",
+          "tenantImageUrl"
+        ]
+      },
+      "MessageCallback": {
+        "type": "object",
+        "properties": {}
+      },
+      "BotAssistantSettings": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "tenantId": {
+            "type": "string"
+          },
+          "botDeploymentId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "enabled",
+          "tenantId",
+          "botDeploymentId"
+        ]
+      },
+      "LivechatSettings": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "organizationId": {
+            "type": "string"
+          },
+          "isTranslationEnabled": {
+            "type": "boolean"
+          },
+          "agentDefaultLanguage": {
+            "type": "string"
+          },
+          "livechatMode": {
+            "enum": [
+              "public",
+              "semi-private"
+            ],
+            "type": "string"
+          },
+          "idleReminderThreshold": {
+            "type": "number"
+          },
+          "botAssistantSettings": {
+            "$ref": "#/components/schemas/BotAssistantSettings"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "isTranslationEnabled",
+          "agentDefaultLanguage",
+          "livechatMode",
+          "idleReminderThreshold"
+        ]
+      },
+      "BusinessHours": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "userGroupId": {
+            "type": "string"
+          },
+          "day": {
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "minimum": 0,
+            "maximum": 6,
+            "type": "number"
+          },
+          "opensAt": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1440
+          },
+          "closesAt": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1440
+          }
+        },
+        "required": [
+          "id",
+          "userGroupId",
+          "day",
+          "opensAt",
+          "closesAt"
+        ]
+      },
+      "LivechatNote": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "createDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updateDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "from": {
+            "$ref": "#/components/schemas/LivechatParticipant"
+          },
+          "conversation": {
+            "$ref": "#/components/schemas/LivechatConversation"
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "createDate",
+          "updateDate",
+          "from",
+          "conversation"
+        ]
+      },
+      "PredefinedResponse": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "platformUserId": {
+            "type": "string"
+          },
+          "organizationId": {
+            "type": "string"
+          },
+          "organizationWide": {
+            "type": "boolean"
+          },
+          "tenantIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "text",
+          "id",
+          "name",
+          "platformUserId",
+          "organizationId",
+          "organizationWide",
+          "categories"
+        ]
+      },
+      "KeyValueStringPair": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "AgentInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "email",
+              "number",
+              "phone_number",
+              "date",
+              "plain_text",
+              "choice"
+            ]
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "isRequired": {
+            "type": "boolean"
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KeyValueStringPair"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "prompt",
+          "isRequired",
+          "entries"
+        ]
+      },
+      "PredefinedAction": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "runOnMissedRequest": {
+            "type": "boolean"
+          },
+          "runOnEndConversation": {
+            "type": "boolean"
+          },
+          "headers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KeyValueStringPair"
+            }
+          },
+          "agentInput": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentInput"
+            }
+          },
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "platformUserId": {
+            "type": "string"
+          },
+          "organizationId": {
+            "type": "string"
+          },
+          "organizationWide": {
+            "type": "boolean"
+          },
+          "tenantIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "url",
+          "runOnMissedRequest",
+          "runOnEndConversation",
+          "headers",
+          "agentInput",
+          "id",
+          "name",
+          "platformUserId",
+          "organizationId",
+          "organizationWide",
+          "categories"
+        ]
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {}
+      },
+      "TwilioWebhookVideoDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "RecordingRulesInstance": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}

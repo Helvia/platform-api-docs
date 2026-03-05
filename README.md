@@ -9,13 +9,14 @@ This repository hosts the **curated** OpenAPI specifications for all Helvia.ai P
 | Service | Spec URL (for GitBook) |
 |---------|------------------------|
 | hbf-core | [hbf-core.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-core.openapi.json) |
+| semantic-doc-segmenter | [semantic-doc-segmenter.openapi.json](https://helvia.github.io/platform-api-docs/specs/semantic-doc-segmenter.openapi.json) |
 | hbf-nlp | [hbf-nlp.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-nlp.openapi.json) |
+| helvia-rag-pipelines | [helvia-rag-pipelines.openapi.json](https://helvia.github.io/platform-api-docs/specs/helvia-rag-pipelines.openapi.json) |
+| hbf-lcm | [hbf-lcm.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-lcm.openapi.json) |
 | hbf-session-manager | [hbf-session-manager.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-session-manager.openapi.json) |
+| hbf-data-manager | [hbf-data-manager.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-data-manager.openapi.json) |
 | hbf-media-manager | [hbf-media-manager.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-media-manager.openapi.json) |
 | hbf-reports | [hbf-reports.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-reports.openapi.json) |
-| hbf-data-manager | [hbf-data-manager.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-data-manager.openapi.json) |
-| helvia-rag-pipelines | [helvia-rag-pipelines.openapi.json](https://helvia.github.io/platform-api-docs/specs/helvia-rag-pipelines.openapi.json) |
-| semantic-doc-segmenter | [semantic-doc-segmenter.openapi.json](https://helvia.github.io/platform-api-docs/specs/semantic-doc-segmenter.openapi.json) |
 
 ## How Specs Are Generated
 
