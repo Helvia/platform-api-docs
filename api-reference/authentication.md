@@ -16,12 +16,12 @@ Used by the hbf-console frontend and any external client calling hbf-core APIs o
 
 ```bash
 # Production
-curl -X POST https://api.helvia.ai/auth/login \
+curl -X POST https://api.helvia.ai/login \
   -H "Content-Type: application/json" \
   -d '{"email": "you@example.com", "password": "your-password"}'
 
 # Local development
-curl -X POST http://localhost:8080/auth/login \
+curl -X POST http://localhost:8080/login \
   -H "Content-Type: application/json" \
   -d '{"email": "admin@helvia.dev", "password": "ChangeMe123!"}'
 ```
