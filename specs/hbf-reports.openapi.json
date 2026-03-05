@@ -1,0 +1,526 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/organization/{orgId}/report/schedule": {
+      "get": {
+        "operationId": "ReportsController_getReportSchedule",
+        "summary": "Get a list of scheduled reports by organization id",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "example": "643643524",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "example": "1",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "example": "10",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "paginated",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "order",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "id",
+                "name",
+                "organization_id",
+                "enabled",
+                "weekly",
+                "monthly",
+                "recipients",
+                "createdAt",
+                "createdBy",
+                "modifiedAt",
+                "modifiedBy"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "enabled",
+            "required": false,
+            "in": "query",
+            "example": "true",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "searchRecipients",
+            "required": false,
+            "in": "query",
+            "example": "recipient@mail.com",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "searchText",
+            "required": false,
+            "in": "query",
+            "example": "test report",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenants",
+            "required": false,
+            "in": "query",
+            "example": "tenants1,tenant2,tenant3",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ScheduledReport"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Reports Schedule"
+        ]
+      },
+      "post": {
+        "operationId": "ReportsController_createReportSchedule",
+        "summary": " Schedule a new report",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "example": "643643524",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduledReportDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduledReport"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Reports Schedule"
+        ]
+      }
+    },
+    "/organization/{orgId}/report/schedule/{id}": {
+      "put": {
+        "operationId": "ReportsController_replaceReportSchedule",
+        "summary": "Replace a scheduled report",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "example": "643643524",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduledReportDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduledReport"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Reports Schedule"
+        ]
+      },
+      "delete": {
+        "operationId": "ReportsController_deleteReportSchedule",
+        "summary": " Delete a scheduled report",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "example": "643643524",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation"
+          }
+        },
+        "tags": [
+          "Reports Schedule"
+        ]
+      }
+    },
+    "/organization/{orgId}/report/schedule/trigger/{id}": {
+      "get": {
+        "operationId": "ReportsController_triggerReport",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Reports Schedule"
+        ]
+      }
+    },
+    "/organization/{orgId}/report/export": {
+      "get": {
+        "operationId": "ExportsController_exportReport",
+        "summary": " Export a report",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "example": "643643524",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "required": true,
+            "in": "query",
+            "example": "2022-09-11",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "required": true,
+            "in": "query",
+            "example": "2022-10-11",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "timeZone",
+            "required": true,
+            "in": "query",
+            "example": "Europe/Athens",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantsFilter",
+            "required": false,
+            "in": "query",
+            "example": "tenants1,tenant2,tenant3",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "sections",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "SUMMARY",
+                  "AUTOMATED_ANSWERS",
+                  "LIVECHAT",
+                  "DECISION_TREES",
+                  "INTERVIEWS",
+                  "USER_FEEDBACK",
+                  "MISSED_QUESTIONS",
+                  "CSAT"
+                ]
+              }
+            }
+          },
+          {
+            "name": "queryType",
+            "required": false,
+            "in": "query",
+            "example": "true",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful Operation"
+          }
+        },
+        "tags": [
+          "Reports Export"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Helvia.ai Reports Service",
+    "description": "Reporting and analytics service for the Helvia.ai Platform",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Reports Export"
+    },
+    {
+      "name": "Reports Schedule"
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "ScheduledReport": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "orgId": {
+            "type": "string"
+          },
+          "tenants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "recipients": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "weekly": {
+            "type": "boolean"
+          },
+          "monthly": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "modifiedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "modifiedBy": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "orgId",
+          "tenants",
+          "sections",
+          "recipients",
+          "enabled",
+          "weekly",
+          "monthly",
+          "createdAt",
+          "createdBy",
+          "modifiedAt",
+          "modifiedBy",
+          "timezone",
+          "description"
+        ]
+      },
+      "ScheduledReportDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tenants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "recipients": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "weekly": {
+            "type": "boolean"
+          },
+          "monthly": {
+            "type": "boolean"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "tenants",
+          "sections",
+          "recipients",
+          "enabled",
+          "weekly",
+          "monthly",
+          "timezone",
+          "description"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,326 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_healthCheck",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Application"
+        ]
+      }
+    },
+    "/organization/{orgId}/media": {
+      "get": {
+        "operationId": "MediaController_listMedia",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "example": "643643524",
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "1",
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "10",
+              "type": "number"
+            }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "file name",
+              "type": "string"
+            }
+          },
+          {
+            "name": "fileType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "image/jpeg",
+              "type": "string"
+            }
+          },
+          {
+            "name": "createdBy",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "username",
+              "type": "string"
+            }
+          },
+          {
+            "name": "createdByUserId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "id",
+                "organization_id",
+                "fileName",
+                "url",
+                "mimeType",
+                "createdAt",
+                "createdBy",
+                "fileSize"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Media"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a paginated list of available media by organization id",
+        "tags": [
+          "Media manager"
+        ]
+      },
+      "post": {
+        "operationId": "MediaController_createMedia",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "example": "643643524",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Add a new media",
+        "tags": [
+          "Media manager"
+        ]
+      }
+    },
+    "/organization/{orgId}/media/batch": {
+      "delete": {
+        "operationId": "MediaController_batchDeleteMedia",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "example": "643643524",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchDeleteDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Operation"
+          }
+        },
+        "summary": "Batch delete media files",
+        "tags": [
+          "Media manager"
+        ]
+      }
+    },
+    "/organization/{orgId}/media/{id}": {
+      "delete": {
+        "operationId": "MediaController_deleteMedia",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "example": "643643524",
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "example": "10",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation"
+          }
+        },
+        "summary": "Delete a media",
+        "tags": [
+          "Media manager"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Helvia.ai Media Manager",
+    "description": "Media file management service for the Helvia.ai Platform",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Application"
+    },
+    {
+      "name": "Media manager"
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "Media": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "orgId": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "fileSize": {
+            "type": "number"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "publicToOrg": {
+            "type": "boolean"
+          },
+          "createdByUserId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "orgId",
+          "fileName",
+          "url",
+          "mimeType",
+          "fileSize",
+          "createdAt",
+          "createdBy",
+          "publicToOrg",
+          "createdByUserId"
+        ]
+      },
+      "BatchDeleteDTO": {
+        "type": "object",
+        "properties": {
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "ids"
+        ]
+      }
+    }
+  }
+}

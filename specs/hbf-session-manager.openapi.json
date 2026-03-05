@@ -1,0 +1,417 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/organizations/{orgId}/integrations": {
+      "post": {
+        "operationId": "SessionsController_createIntegration",
+        "summary": "Create an integration",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "example": "345345sf234",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IntegrationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationResource"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "HBF-Sessions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "SessionsController_listIntegrations",
+        "summary": "List integrations for an organization.",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "example": "345345sf234",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IntegrationResource"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "HBF-Sessions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/organizations/{orgId}/integrations/{integrationId}": {
+      "get": {
+        "operationId": "SessionsController_getIntegration",
+        "summary": "Get an integration",
+        "parameters": [
+          {
+            "name": "integrationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "example": "11",
+              "type": "string"
+            }
+          },
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "example": "345345sf234",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationResource"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "HBF-Sessions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "put": {
+        "operationId": "SessionsController_replaceIntegration",
+        "summary": "Replace an integration",
+        "parameters": [
+          {
+            "name": "integrationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "example": "11",
+              "type": "string"
+            }
+          },
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "example": "345345sf234",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IntegrationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationResource"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "HBF-Sessions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "SessionsController_deleteIntegration",
+        "summary": "Delete an integration",
+        "parameters": [
+          {
+            "name": "integrationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "example": "11",
+              "type": "string"
+            }
+          },
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "example": "345345sf234",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Operation"
+          }
+        },
+        "tags": [
+          "HBF-Sessions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/organizations/{orgId}/integrations/errors/{integrationId}": {
+      "get": {
+        "operationId": "SessionsErrorController_listErrors",
+        "summary": "List errors for an integration of an organization.",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "example": "345345sf234",
+              "type": "string"
+            }
+          },
+          {
+            "name": "integrationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SessionIntegrationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "HBF-Sessions-Errors"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Helvia.ai Session Manager",
+    "description": "Session lifecycle management service for the Helvia.ai Platform",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "HBF-Sessions"
+    },
+    {
+      "name": "HBF-Sessions-Errors"
+    }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "HeaderDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      },
+      "IntegrationDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "example": "sampleUrl"
+          },
+          "tenants": {
+            "example": "[\"123123123\"]",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "headers": {
+            "example": "[{\"name\":\"token\",\"value\":\"tokenValue\"},{\"name\":\"token2\",\"value\":\"token2Value\"}]",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HeaderDto"
+            }
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "errorEmailRecipients": {
+            "example": "example@email.com",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "url",
+          "tenants",
+          "enabled",
+          "errorEmailRecipients"
+        ]
+      },
+      "IntegrationResource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string"
+          },
+          "tenants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "headers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HeaderDto"
+            }
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "errorEmailRecipients": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "modifiedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "modifiedBy": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "url",
+          "tenants",
+          "headers",
+          "enabled",
+          "errorEmailRecipients",
+          "createdAt",
+          "createdBy",
+          "modifiedAt",
+          "modifiedBy"
+        ]
+      },
+      "SessionIntegrationError": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}

@@ -1071,12 +1071,34 @@
     }
   },
   "info": {
-    "title": "HBF-NLP",
-    "description": "HBF NLP Service",
+    "title": "Helvia.ai NLP Service",
+    "description": "NLP processing service for the Helvia.ai Platform",
     "version": "1.2.2",
     "contact": {}
   },
-  "tags": [],
+  "tags": [
+    {
+      "name": "App"
+    },
+    {
+      "name": "Generation"
+    },
+    {
+      "name": "Llm"
+    },
+    {
+      "name": "Messages Metadata"
+    },
+    {
+      "name": "NLP"
+    },
+    {
+      "name": "TestSet"
+    },
+    {
+      "name": "models"
+    }
+  ],
   "servers": [],
   "components": {
     "securitySchemes": {

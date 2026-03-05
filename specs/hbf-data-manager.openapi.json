@@ -1,0 +1,352 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "HealthController_getHealth[0]",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_getHealth[1]",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/orgs/{orgId}/interactions": {
+      "get": {
+        "operationId": "InteractionsController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InteractionMetadataDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List all interaction metadata ordered by timestamp desc",
+        "tags": [
+          "interactions"
+        ]
+      }
+    },
+    "/orgs/{orgId}/events/{hbfEventId}/interactions": {
+      "get": {
+        "operationId": "InteractionsController_getByEvent",
+        "parameters": [
+          {
+            "name": "hbfEventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "ASC",
+              "type": "string",
+              "enum": [
+                "ASC",
+                "DESC"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListInteractionMetadataResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get interaction metadata for an HBF Event ID",
+        "tags": [
+          "interactions"
+        ]
+      }
+    },
+    "/orgs/{orgId}/events/{hbfEventId}/session-variables": {
+      "get": {
+        "operationId": "InteractionsController_getSessionVariablesAtEvent",
+        "parameters": [
+          {
+            "name": "hbfEventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LatestVariablesResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get current variable values up to the given event",
+        "tags": [
+          "interactions"
+        ]
+      }
+    },
+    "/chat-sessions/{sessionId}/interactions": {
+      "delete": {
+        "operationId": "InteractionsDeleteController_deleteSessionInteractions",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Deletion scheduled"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete all interaction metadata for a ChatSession (async) ",
+        "tags": [
+          "interactions"
+        ]
+      }
+    },
+    "/chat-sessions/interactions/bulk-delete": {
+      "post": {
+        "operationId": "InteractionsDeleteController_bulkDeleteSessionInteractions",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkDeleteSessionsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Bulk deletion scheduled"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Bulk delete interaction metadata for multiple sessions (async)",
+        "tags": [
+          "interactions"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Helvia.ai Data Manager",
+    "description": "Data management service for the Helvia.ai Platform",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Health"
+    },
+    {
+      "name": "interactions"
+    }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "InteractionMetadataDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "hbfEventId": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string"
+          },
+          "friendlyName": {
+            "type": "string",
+            "description": "Optional friendly name for the interaction node."
+          },
+          "payload": {
+            "type": "object"
+          },
+          "hasError": {
+            "type": "boolean",
+            "description": "Indicates whether the interaction resulted in an error."
+          },
+          "duration": {
+            "type": "number",
+            "description": "Duration in milliseconds for supported interaction types."
+          }
+        },
+        "required": [
+          "id",
+          "hbfEventId",
+          "sessionId",
+          "timestamp",
+          "type",
+          "payload"
+        ]
+      },
+      "ListInteractionMetadataResponseDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InteractionMetadataDto"
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "VariableRecordDto": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "object",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "key",
+          "value",
+          "updatedAt"
+        ]
+      },
+      "LatestVariablesResponseDto": {
+        "type": "object",
+        "properties": {
+          "hbfEventId": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "variablesCount": {
+            "type": "number"
+          },
+          "variables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VariableRecordDto"
+            }
+          }
+        },
+        "required": [
+          "hbfEventId",
+          "sessionId",
+          "variablesCount",
+          "variables"
+        ]
+      },
+      "BulkDeleteSessionsDto": {
+        "type": "object",
+        "properties": {
+          "sessionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "sessionIds"
+        ]
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Helvia.ai Semantic Document Segmenter",
-    "description": "Helvia.ai Semantic Document Segmenter",
+    "title": "Helvia.ai Document Segmenter",
+    "description": "Document ingestion, segmentation, and tagging service for the Helvia.ai Platform",
     "contact": {
       "name": "Helvia.ai",
       "url": "https://helvia.ai/",
@@ -596,7 +596,7 @@
               }
             ],
             "title": "Maxsize",
-            "default": 50000
+            "default": 5000
           },
           "usetags": {
             "anyOf": [
@@ -643,7 +643,7 @@
               }
             ],
             "title": "Process Images",
-            "default": false
+            "default": true
           },
           "pdf_parsing_backend": {
             "anyOf": [
@@ -1118,5 +1118,16 @@
         "scheme": "bearer"
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Debug resources"
+    },
+    {
+      "name": "Documents resources"
+    },
+    {
+      "name": "Jobs resources"
+    }
+  ]
 }

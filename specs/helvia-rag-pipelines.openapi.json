@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Helvia.ai RAG Pipelines Service",
-    "description": "Helvia.ai GPT Pipelines Service",
+    "title": "Helvia.ai RAG Pipelines",
+    "description": "Retrieval-augmented generation and semantic search service for the Helvia.ai Platform",
     "contact": {
       "name": "Helvia.ai",
       "url": "https://helvia.ai",
@@ -2938,5 +2938,13 @@
         "scheme": "bearer"
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Administration endpoint"
+    },
+    {
+      "name": "Helvia NLP Pipelines Service"
+    }
+  ]
 }
