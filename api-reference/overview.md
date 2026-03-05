@@ -50,6 +50,7 @@ graph TB
     channels --> bot
     core --> mongo
     core --> redis
+    core -->|"REST — health checks"| bot
     core -->|"REST"| rag
     nlp -->|"REST"| core
     nlp --> mysql
