@@ -2,11 +2,9 @@
 
 The Bot API exposes a synchronous HTTP endpoint for interacting with AI Agents programmatically. It follows a text-in/text-out pattern — send a JSON request and receive the agent's response(s) in the same HTTP response.
 
-**Production URL:** `https://bot-v5.helvia.ai`
+**Endpoint:** `POST https://bot-v5.helvia.ai/api/events`
 
 CORS is fully open (`origin: *`), so browser-based clients can call the API directly.
-
-For the full request/response schemas, authentication details, and error codes, see the **Bot API Reference**.
 
 ## Prerequisites
 
@@ -21,17 +19,11 @@ To find these:
 3. Copy the **Identifier** (this is the `handle`).
 4. Copy the **API Token** (this is the Bearer token for the `Authorization` header).
 
-## Usage Flow
+## Quick Start
 
-All interactions go through a single endpoint: `POST /api/events`. A typical conversation follows this pattern:
+Replace `<API_TOKEN>` and `<AGENT_HANDLE>` with your values and run these two commands to have a full conversation:
 
-1. **Trigger the greeting** — send a postback message to start a new session and get the agent's welcome message.
-2. **Send a text message** — send the user's text and get the agent's response.
-3. **Repeat step 2** for each turn of the conversation.
-
-### Step 1: Trigger the Greeting
-
-This starts a new conversation (session) and returns the agent's opening message.
+**1. Start a session (trigger the greeting):**
 
 ```bash
 curl -X POST 'https://bot-v5.helvia.ai/api/events' \
@@ -40,18 +32,13 @@ curl -X POST 'https://bot-v5.helvia.ai/api/events' \
   -d '{
     "handle": "<AGENT_HANDLE>",
     "message": {
-      "payload": {
-        "type": "node",
-        "data": "greeting"
-      }
+      "payload": { "type": "node", "data": "greeting" }
     },
-    "sender": {
-      "id": "<UNIQUE_USER_ID>"
-    }
+    "sender": { "id": "test-user-1" }
   }'
 ```
 
-### Step 2: Send a Text Message
+**2. Send a message:**
 
 ```bash
 curl -X POST 'https://bot-v5.helvia.ai/api/events' \
@@ -62,15 +49,13 @@ curl -X POST 'https://bot-v5.helvia.ai/api/events' \
     "message": {
       "text": "Hello, I need help with time management"
     },
-    "sender": {
-      "id": "<UNIQUE_USER_ID>"
-    }
+    "sender": { "id": "test-user-1" }
   }'
 ```
 
-### Sample Response
+**Response:**
 
-A single user message can produce one or more agent responses. The text of each response is in `result.responses[N].altText`.
+Both calls return the same response format. A single message can produce one or more agent responses — the text of each is in `altText`:
 
 ```json
 {
@@ -94,7 +79,33 @@ A single user message can produce one or more agent responses. The text of each 
 }
 ```
 
-See the **Bot API Reference** for the full response schema, including optional metadata and stripped markdown fields.
+Errors return: `{ "status": "error", "error": "<message>" }` with an appropriate HTTP status code (400, 401, 403, or 500).
+
+## Request Fields
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `handle` | string | Yes | Agent deployment identifier |
+| `message.text` | string | * | User's text message |
+| `message.payload` | object | * | Postback trigger (see below) |
+| `sender.id` | string | Recommended | Unique user ID — use the same ID across messages to maintain session context |
+| `sender.name` | string | No | User display name |
+| `sender.email` | string | No | User email address |
+| `language` | string | No | Language code override (e.g. `"EN"`, `"EL"`, `"DE"`) |
+| `tagOperations` | object | No | Add/remove session tags (see Advanced Options) |
+| `options` | object | No | Response formatting options (see Advanced Options) |
+
+\* Provide either `message.text` (text message) or `message.payload` (postback), not both.
+
+### Postback Messages
+
+Postback messages trigger specific flow nodes, intents, or actions instead of sending text:
+
+| `payload.type` | `payload.data` | Use case |
+|-----------------|----------------|----------|
+| `"node"` | node ID (e.g. `"greeting"`) | Trigger a specific flow node |
+| `"intent"` | intent name | Trigger a specific intent |
+| `"action"` | `{ "actions": [...] }` | Trigger an action with parameters |
 
 ## Key Concepts
 
@@ -118,8 +129,6 @@ Within a session, the agent maintains conversational context (collected variable
 
 ## Advanced Options
 
-The `POST /api/events` endpoint supports several optional fields for advanced use cases. See the **Bot API Reference** for the full schema.
-
 ### Language Override
 
 Force a specific language for the agent's response by including `"language": "EN"` (or `"EL"`, `"DE"`, etc.) in the request body.
@@ -139,5 +148,36 @@ Add or remove tags on the current session using the `tagOperations` field:
 
 Include additional data in the response using the `options` field:
 
-- `includeMetadata: true` — adds `responsesIds` and `nodesIds` arrays, useful for debugging or analytics.
-- `includeStrippedMarkdownTextResponses: true` — adds `responsesStrippedMarkdownText` array with plain text, useful for TTS or plain-text displays.
+| Option | Effect |
+|--------|--------|
+| `includeMetadata: true` | Adds `responsesIds` and `nodesIds` arrays — useful for debugging or analytics |
+| `includeStrippedMarkdownTextResponses: true` | Adds `responsesStrippedMarkdownText` array with plain text — useful for TTS |
+
+### Complete Example with All Options
+
+```bash
+curl -X POST 'https://bot-v5.helvia.ai/api/events' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer <API_TOKEN>' \
+  -d '{
+    "handle": "<AGENT_HANDLE>",
+    "message": {
+      "text": "Hello"
+    },
+    "sender": {
+      "id": "user-123",
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    "language": "EN",
+    "tagOperations": {
+      "add": ["vip"]
+    },
+    "options": {
+      "includeMetadata": true,
+      "includeStrippedMarkdownTextResponses": true
+    }
+  }'
+```
+
+For the full request/response schemas and detailed error codes, see the **Bot API Reference**.
