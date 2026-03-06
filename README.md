@@ -9,6 +9,7 @@ This repository hosts the **curated** OpenAPI specifications for all Helvia.ai P
 | Service | Spec URL (for GitBook) |
 |---------|------------------------|
 | hbf-core | [hbf-core.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-core.openapi.json) |
+| hbf-bot | [hbf-bot.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-bot.openapi.json) |
 | semantic-doc-segmenter | [semantic-doc-segmenter.openapi.json](https://helvia.github.io/platform-api-docs/specs/semantic-doc-segmenter.openapi.json) |
 | hbf-nlp | [hbf-nlp.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-nlp.openapi.json) |
 | helvia-rag-pipelines | [helvia-rag-pipelines.openapi.json](https://helvia.github.io/platform-api-docs/specs/helvia-rag-pipelines.openapi.json) |
@@ -17,7 +18,6 @@ This repository hosts the **curated** OpenAPI specifications for all Helvia.ai P
 | hbf-data-manager | [hbf-data-manager.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-data-manager.openapi.json) |
 | hbf-media-manager | [hbf-media-manager.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-media-manager.openapi.json) |
 | hbf-reports | [hbf-reports.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-reports.openapi.json) |
-| hbf-bot | [hbf-bot.openapi.json](https://helvia.github.io/platform-api-docs/specs/hbf-bot.openapi.json) |
 
 **Note:** hbf-bot does not have a live swagger endpoint — its OpenAPI spec is maintained manually. See `api-reference/hbf-bot.md` for the full usage guide.
 
