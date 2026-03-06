@@ -1,0 +1,439 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Helvia.ai Bot API",
+    "description": "Synchronous HTTP API for interacting with AI Agents on the Helvia.ai Platform. Send messages and receive agent responses in a text-in/text-out pattern.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://bot-v5.helvia.ai",
+      "description": "Production"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Events",
+      "description": "Send messages to AI Agents and receive responses"
+    }
+  ],
+  "paths": {
+    "/api/events": {
+      "get": {
+        "tags": ["Events"],
+        "summary": "Health check",
+        "description": "Returns a simple status object to verify the service is running.",
+        "responses": {
+          "200": {
+            "description": "Service is healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Events"],
+        "summary": "Send a message to an AI Agent",
+        "description": "Send a text or postback message to an AI Agent and receive the agent's response(s) synchronously. Use this endpoint for all conversational interactions.\n\n**Usage flow:**\n1. Trigger the greeting with a postback message (`type: \"node\"`, `data: \"greeting\"`) to start a new session\n2. Send text messages for each conversation turn\n3. Use a consistent `sender.id` to maintain session context across messages",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventRequest"
+              },
+              "examples": {
+                "greeting": {
+                  "summary": "Trigger greeting (start new session)",
+                  "value": {
+                    "handle": "my-agent-handle",
+                    "message": {
+                      "payload": {
+                        "type": "node",
+                        "data": "greeting"
+                      }
+                    },
+                    "sender": {
+                      "id": "user-123"
+                    }
+                  }
+                },
+                "textMessage": {
+                  "summary": "Send a text message",
+                  "value": {
+                    "handle": "my-agent-handle",
+                    "message": {
+                      "text": "Hello, I need help with time management"
+                    },
+                    "sender": {
+                      "id": "user-123"
+                    }
+                  }
+                },
+                "withOptions": {
+                  "summary": "Text message with metadata and language",
+                  "value": {
+                    "handle": "my-agent-handle",
+                    "message": {
+                      "text": "Hello"
+                    },
+                    "sender": {
+                      "id": "user-123",
+                      "name": "John Doe",
+                      "email": "john@example.com"
+                    },
+                    "language": "EN",
+                    "options": {
+                      "includeMetadata": true,
+                      "includeStrippedMarkdownTextResponses": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Agent response(s) returned successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponse"
+                },
+                "examples": {
+                  "textResponse": {
+                    "summary": "Simple text response",
+                    "value": {
+                      "status": "ok",
+                      "result": {
+                        "responses": [
+                          {
+                            "id": "TX_b8eb307f-cf33-48fb-bc51-a0e7e6a7d817",
+                            "type": "text",
+                            "options": ["Hi! I'm the Productivity Coach."],
+                            "altText": "Hi! I'm the Productivity Coach."
+                          },
+                          {
+                            "id": "TX_1bfda168-dd49-4dc0-b9fc-56ce9cb5d141",
+                            "type": "text",
+                            "options": ["How can I help you today?"],
+                            "altText": "How can I help you today?"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": "error",
+                  "error": "Validator errors: \"handle\" is required"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "summary": "Missing or malformed header",
+                    "value": {
+                      "status": "error",
+                      "error": "Unauthorized"
+                    }
+                  },
+                  "invalidToken": {
+                    "summary": "JWT verification failed",
+                    "value": {
+                      "status": "error",
+                      "error": "Invalid token"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Token handle mismatch",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": "error",
+                  "error": "Unknown principal"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "API Token from the console (Designer → Deployments → API → API Token)"
+      }
+    },
+    "schemas": {
+      "EventRequest": {
+        "type": "object",
+        "required": ["handle", "message"],
+        "properties": {
+          "handle": {
+            "type": "string",
+            "description": "Agent deployment identifier (from console: Designer → Deployments → API → Identifier)"
+          },
+          "message": {
+            "$ref": "#/components/schemas/Message"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/Sender"
+          },
+          "timestamp": {
+            "type": "number",
+            "description": "Unix timestamp in milliseconds"
+          },
+          "language": {
+            "type": "string",
+            "description": "Language code override (e.g. \"EN\", \"EL\", \"DE\")"
+          },
+          "tagOperations": {
+            "$ref": "#/components/schemas/TagOperations"
+          },
+          "options": {
+            "$ref": "#/components/schemas/RequestOptions"
+          }
+        }
+      },
+      "Message": {
+        "type": "object",
+        "description": "Either a text message (with `text`) or a postback message (with `payload`). Exactly one must be provided.",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "User's text message"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/Postback"
+          },
+          "contexts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional context strings"
+          }
+        }
+      },
+      "Postback": {
+        "type": "object",
+        "required": ["type", "data"],
+        "description": "Trigger a specific flow node, intent, or action",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["node", "intent", "action"],
+            "description": "Type of postback trigger"
+          },
+          "data": {
+            "description": "Target identifier — node ID (e.g. \"greeting\"), intent name, or action object",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "actions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "Sender": {
+        "type": "object",
+        "description": "Identifies the end user. Use a consistent ID per user to maintain conversation context. If omitted, an auto-generated ID with prefix `api_subscriber_` is used.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique user identifier (required if sender is provided)"
+          },
+          "name": {
+            "type": "string",
+            "description": "User display name"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email address"
+          }
+        }
+      },
+      "TagOperations": {
+        "type": "object",
+        "description": "Add or remove tags on the current session. At least one of `add` or `remove` must be present.",
+        "properties": {
+          "add": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tags to add to the session"
+          },
+          "remove": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tags to remove from the session"
+          }
+        }
+      },
+      "RequestOptions": {
+        "type": "object",
+        "properties": {
+          "includeMetadata": {
+            "type": "boolean",
+            "description": "Include `responsesIds` and `nodesIds` arrays in the result"
+          },
+          "includeStrippedMarkdownTextResponses": {
+            "type": "boolean",
+            "description": "Include `responsesStrippedMarkdownText` array with Markdown-stripped plain text"
+          }
+        }
+      },
+      "EventResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["ok"],
+            "example": "ok"
+          },
+          "result": {
+            "type": "object",
+            "properties": {
+              "responses": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AgentResponse"
+                }
+              },
+              "responsesIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Response IDs (only when `includeMetadata` is true)"
+              },
+              "nodesIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Flow node IDs that generated responses (only when `includeMetadata` is true)"
+              },
+              "responsesStrippedMarkdownText": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Plain text responses without Markdown (only when `includeStrippedMarkdownTextResponses` is true)"
+              }
+            }
+          }
+        }
+      },
+      "AgentResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Response ID (e.g. \"TX_<uuid>\")"
+          },
+          "type": {
+            "type": "string",
+            "description": "Response type (text, buttons, cards, etc.)"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Response content"
+          },
+          "altText": {
+            "type": "string",
+            "description": "Plain-text version of the response"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["error"],
+            "example": "error"
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          }
+        }
+      }
+    }
+  }
+}
