@@ -1,10 +1,12 @@
-# Bot API (Agent Interaction)
+# Bot API — Usage Guide
 
 The Bot API exposes a synchronous HTTP endpoint for interacting with AI Agents programmatically. It follows a text-in/text-out pattern — send a JSON request and receive the agent's response(s) in the same HTTP response.
 
 **Production URL:** `https://bot-v5.helvia.ai`
 
 CORS is fully open (`origin: *`), so browser-based clients can call the API directly.
+
+For the full request/response schemas, authentication details, and error codes, see the **Bot API Reference**.
 
 ## Prerequisites
 
@@ -21,13 +23,15 @@ To find these:
 
 ## Usage Flow
 
-A typical conversation follows this pattern:
+All interactions go through a single endpoint: `POST /api/events`. A typical conversation follows this pattern:
 
 1. **Trigger the greeting** — send a postback message to start a new session and get the agent's welcome message.
 2. **Send a text message** — send the user's text and get the agent's response.
 3. **Repeat step 2** for each turn of the conversation.
 
 ### Step 1: Trigger the Greeting
+
+This starts a new conversation (session) and returns the agent's opening message.
 
 ```bash
 curl -X POST 'https://bot-v5.helvia.ai/api/events' \
@@ -66,6 +70,8 @@ curl -X POST 'https://bot-v5.helvia.ai/api/events' \
 
 ### Sample Response
 
+A single user message can produce one or more agent responses. The text of each response is in `result.responses[N].altText`.
+
 ```json
 {
   "status": "ok",
@@ -88,6 +94,8 @@ curl -X POST 'https://bot-v5.helvia.ai/api/events' \
 }
 ```
 
+See the **Bot API Reference** for the full response schema, including optional metadata and stripped markdown fields.
+
 ## Key Concepts
 
 ### Handle
@@ -104,68 +112,32 @@ Sessions group message exchanges into conversations. A new session is created wh
 
 - A message arrives from a **new `sender.id`** (first-time user).
 - The **greeting is triggered** via a postback message (explicit session start).
-- A message arrives from an existing user but the **inactivity timeout** has elapsed since their last message.
+- A message arrives from an existing user but the **inactivity timeout** has elapsed since their last message. The timeout is configurable in the console under **Designer → Settings → Configuration**.
 
 Within a session, the agent maintains conversational context (collected variables, flow state).
 
 ## Advanced Options
 
+The `POST /api/events` endpoint supports several optional fields for advanced use cases. See the **Bot API Reference** for the full schema.
+
 ### Language Override
 
-Force a specific language for the agent's response:
-
-```json
-{
-  "handle": "...",
-  "message": { "text": "Hello" },
-  "sender": { "id": "user1" },
-  "language": "EN"
-}
-```
+Force a specific language for the agent's response by including `"language": "EN"` (or `"EL"`, `"DE"`, etc.) in the request body.
 
 ### Tag Operations
 
-Add or remove tags on the current session:
+Add or remove tags on the current session using the `tagOperations` field:
 
 ```json
-{
-  "handle": "...",
-  "message": { "text": "Hello" },
-  "sender": { "id": "user1" },
-  "tagOperations": {
-    "add": ["vip", "returning-customer"],
-    "remove": ["new-user"]
-  }
+"tagOperations": {
+  "add": ["vip", "returning-customer"],
+  "remove": ["new-user"]
 }
 ```
 
 ### Response Options
 
-| Option | Effect |
-|--------|--------|
-| `includeMetadata` | Adds `responsesIds` and `nodesIds` arrays — useful for debugging or analytics |
-| `includeStrippedMarkdownTextResponses` | Adds `responsesStrippedMarkdownText` array with plain text — useful for TTS |
+Include additional data in the response using the `options` field:
 
-```json
-{
-  "handle": "...",
-  "message": { "text": "Hello" },
-  "sender": { "id": "user1" },
-  "options": {
-    "includeMetadata": true,
-    "includeStrippedMarkdownTextResponses": true
-  }
-}
-```
-
-## Error Responses
-
-| Status | Error | Cause |
-|--------|-------|-------|
-| 400 | `Validator errors: ...` | Request body failed schema validation |
-| 401 | `Unauthorized` | Missing or malformed `Authorization` header |
-| 401 | `Invalid token` | JWT verification failed |
-| 403 | `Unknown principal` | JWT `handle` doesn't match the request `handle` |
-| 500 | `Server misconfiguration` | API auth secret not configured |
-
-All errors return: `{ "status": "error", "error": "<message>" }`
+- `includeMetadata: true` — adds `responsesIds` and `nodesIds` arrays, useful for debugging or analytics.
+- `includeStrippedMarkdownTextResponses: true` — adds `responsesStrippedMarkdownText` array with plain text, useful for TTS or plain-text displays.
